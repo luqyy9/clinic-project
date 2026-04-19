@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bubbly Particle Trail | Interactive Cursor Effect</title>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="index.html">WOWClinicFinder</a>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="map.html" class="nav-link">Find Clinics</a>
+      <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="cursor.html" class="nav-link active">Interactive Demo</a>
+    </div>
+    <div class="nav-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+    <div class="bubbly-particle-trail">
+        <div class="particles"></div>
+    </div>
+
+    <div class="cta">Move the mouse around</div>
+
+<!-- Navigation Script -->
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

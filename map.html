@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Map</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="index.html">WOWClinicFinder</a>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="map.html" class="nav-link active">Find Clinics</a>
+      <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="cursor.html" class="nav-link">Interactive Demo</a>
+    </div>
+    <div class="nav-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Particle Trail Container -->
+<div class="bubbly-particle-trail">
+  <div class="particles"></div>
+</div>
+
+<div id="map"></div>
+
+<input type="text" id="search" placeholder="Search clinic..." 
+style="position:absolute; top:60px; left:20px; z-index:1000; padding:8px;">
+
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Navigation Script -->
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+<script>
+  let clinics = [
+  { name: "Clinic Tuah", lat: 3.8356432408130274, lng: 103.30245453670729, description: "Offers general medical services and consultations.", hours: "9am - 6pm" },
+  { name: "Cosmetic clinic Whooper", lat: 3.8151244897534364, lng: 103.32772948692494, description: "Specialized cosmetic services and plastic surgery", hours: "8am - 8pm" },
+  { name: "Dental Clinic Amru", lat: 3.7096273738685657,  lng: 103.10816168159545, description: "Specialized cosmetic dentistry and tooth whitening. State-of-the-art equipment and pain-free procedures.", hours: "10am - 7pm" },
+  { name: "kids clinic ISka", lat: 3.839273085930105, lng: 103.32888105301126, description: "provide kids with medical care ", hours: "9am - 9pm" }
+];
+
+let markers = [];
+
+// Initialize the map
+let map = L.map('map').setView([3.81, 103.32], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// function to display clinics
+function showClinics(list) {
+  // remove old markers
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+
+  list.forEach(clinic => {
+    let marker = L.marker([clinic.lat, clinic.lng])
+      .addTo(map)
+      .bindPopup(`
+        <b>${clinic.name}</b><br>
+        <p style="font-size:12px; color:gray;">${clinic.description}</p>
+        <p style="font-size:12px; color:red;">Operating Hours: ${clinic.hours}</p>
+        <button onclick="bookClinic('${clinic.name}')">Book</button>
+      `);
+
+    markers.push(marker);
+  });
+}
+
+// first load
+showClinics(clinics);
+
+// search function
+document.getElementById("search").addEventListener("keyup", function() {
+  let keyword = this.value.toLowerCase();
+
+  let filtered = clinics.filter(c =>
+    c.name.toLowerCase().includes(keyword)
+  );
+
+  showClinics(filtered);
+});
+
+// Function to handle booking
+function bookClinic(clinicName) {
+  localStorage.setItem('selectedClinic', clinicName);
+  window.location.href = 'booking.html';
+}
+</script>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

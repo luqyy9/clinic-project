@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="index.html">WOWClinicFinder</a>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="map.html" class="nav-link">Find Clinics</a>
+      <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="cursor.html" class="nav-link">Interactive Demo</a>
+    </div>
+    <div class="nav-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Particle Trail Container -->
+<div class="bubbly-particle-trail">
+  <div class="particles"></div>
+</div>
+
+<h2>✅ Appointment Confirmed</h2>
+
+<div class="card">
+  <p id="details"></p>
+</div>
+
+<a href="index.html" class="btn">Back to Home</a>
+
+<script>
+  let data = JSON.parse(localStorage.getItem("bookingData"));
+
+  document.getElementById("details").innerHTML = `
+    <b>Clinic:</b> ${data.clinic} <br>
+    <b>Doctor Type:</b> ${data.doctorType} <br>
+    <b>Doctor Name:</b> ${data.doctorName} <br>
+    <b>Patient Name:</b> ${data.name} <br>
+    <b>Phone:</b> ${data.phone} <br>
+    <b>IC Number:</b> ${data.icNumber} <br>
+    <b>Pain/Symptoms:</b> <br>
+    <p style="text-align: left; background: #f8f9fa; padding: 12px; border-radius: 8px;">${data.painDescription}</p>
+    <b>Date:</b> ${data.date} <br>
+    <b>Time:</b> ${data.time}
+  `;
+</script>
+
+<!-- Navigation Script -->
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

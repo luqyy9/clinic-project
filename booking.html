@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="index.html">WOWClinicFinder</a>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="map.html" class="nav-link">Find Clinics</a>
+      <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="cursor.html" class="nav-link">Interactive Demo</a>
+    </div>
+    <div class="nav-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Particle Trail Container -->
+<div class="bubbly-particle-trail">
+  <div class="particles"></div>
+</div>
+
+<h2 id="clinicName"></h2>
+
+<form onsubmit="saveBooking(event)" class="form">
+  <input type="text" placeholder="Your Name" required>
+  <input type="text" placeholder="Phone Number" required>
+  <input type="text" placeholder="Your IC number without (-)" required>
+  
+  <label for="doctorType">Doctor Type:</label>
+  <select id="doctorType" required onchange="showDoctorName()">
+    <option value="">-- Select Doctor Type --</option>
+  </select>
+  
+  <label for="doctorName">Doctor Name:</label>
+  <p id="doctorName" style="background:#f0f0f0; padding:8px; border-radius:4px;">-- Select a doctor type --</p>
+  
+  <label for="painDescription">Describe Your Pain/Symptoms:</label>
+  <textarea id="painDescription" placeholder="Please describe your pain, symptoms, or health concerns in detail..." rows="5" required></textarea>
+  
+  <input type="date" required>
+  <input type="time" required>
+  <button type="submit">Confirm Booking</button>
+</form>
+
+<script>
+  // Doctor types and names for each clinic
+  let clinicDoctors = {
+    "Clinic Tuah": [
+      { type: "General Practitioner", name: "Dr. Ahmad Hassan" },
+      { type: "Family Physician", name: "Dr. Fatima Rahman" },
+      { type: "Internal Medicine Specialist", name: "Dr. Mehdi Khan" },
+      { type: "Emergency Physician", name: "Dr. Zainab Ali" }
+    ],
+    "Cosmetic clinic Whooper": [
+      { type: "Plastic Surgeon", name: "Dr. Johan Aziz" },
+      { type: "Cosmetic Surgeon", name: "Dr. Siti Nurhaliza" },
+      { type: "Dermatologist", name: "Dr. Akyas M" },
+      { type: "Aesthetic Physician", name: "Dr. Aisha Mohamed" }
+    ],
+    "Dental Clinic Amru": [
+      { type: "Cosmetic Dentist", name: "Dr. Chen Wei" },
+      { type: "Prosthodontist", name: "Dr. Lily Wong" },
+      { type: "Endodontist", name: "Dr. Akmal Ali" }
+    ],
+    "kids clinic ISka": [
+      { type: "Pediatrician", name: "Dr. Priya Sharma" },
+      { type: "Child Psychologist", name: "Dr. Vikram Singh" },
+      { type: "Pediatric Surgeon", name: "Dr. Kavya Patel" },
+      { type: "Neonatologist", name: "Dr. Arjun Nair" }
+    ]
+  };
+
+  let clinic = localStorage.getItem("selectedClinic");
+  let doctorNameMap = {}; // Store doctor names for quick lookup
+  
+  document.getElementById("clinicName").innerText = "Booking at: " + clinic;
+
+  // Populate doctor types based on selected clinic
+  function populateDoctors() {
+    let doctorSelect = document.getElementById("doctorType");
+    let doctors = clinicDoctors[clinic] || [];
+    
+    doctors.forEach(doctorObj => {
+      let option = document.createElement("option");
+      option.value = doctorObj.type;
+      option.text = doctorObj.type;
+      doctorSelect.appendChild(option);
+      
+      // Store the doctor name for this type
+      doctorNameMap[doctorObj.type] = doctorObj.name;
+    });
+  }
+
+  // Show doctor name when type is selected
+  function showDoctorName() {
+    let selectedType = document.getElementById("doctorType").value;
+    let doctorNameDisplay = document.getElementById("doctorName");
+    
+    if (selectedType && doctorNameMap[selectedType]) {
+      doctorNameDisplay.innerText = doctorNameMap[selectedType];
+    } else {
+      doctorNameDisplay.innerText = "-- Select a doctor type --";
+    }
+  }
+
+  // Load doctors on page load
+  populateDoctors();
+
+  function saveBooking(e) {
+    e.preventDefault();
+
+    let inputs = document.querySelectorAll("input");
+    let doctorType = document.getElementById("doctorType").value;
+    let doctorName = doctorNameMap[doctorType] || "";
+    let painDescription = document.getElementById("painDescription").value;
+
+    let booking = {
+      clinic: clinic,
+      doctorType: doctorType,
+      doctorName: doctorName,
+      name: inputs[0].value,
+      phone: inputs[1].value,
+      icNumber: inputs[2].value,
+      painDescription: painDescription,
+      date: inputs[3].value,
+      time: inputs[4].value
+    };
+
+    localStorage.setItem("bookingData", JSON.stringify(booking));
+
+    window.location.href = "confirm.html";
+  }
+</script>
+
+<!-- Navigation Script -->
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
