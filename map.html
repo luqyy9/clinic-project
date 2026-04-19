@@ -37,8 +37,14 @@
 
 <div id="map"></div>
 
-<input type="text" id="search" placeholder="Search clinic..." 
-style="position:absolute; top:60px; left:20px; z-index:1000; padding:8px;">
+<input id="search" type="search" placeholder="Search clinics..." list="clinic-suggestions">
+
+<datalist id="clinic-suggestions">
+  <option value="Clinic Tuah">
+  <option value="Cosmetic clinic Whooper">
+  <option value="Dental Clinic Amru">
+  <option value="kids clinic ISka">
+</datalist>
 
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -121,7 +127,7 @@ document.getElementById("search").addEventListener("keyup", function() {
   let keyword = this.value.toLowerCase();
 
   let filtered = clinics.filter(c =>
-    c.name.toLowerCase().includes(keyword)
+    c.name.toLowerCase().startsWith(keyword)
   );
 
   showClinics(filtered);
