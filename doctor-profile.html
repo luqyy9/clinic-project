@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="index.html">WOWClinicFinder</a>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="map.html" class="nav-link">Find Clinics</a>
+      <a href="booking.html" class="nav-link">Booking</a>
+      <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="cursor.html" class="nav-link">Interactive Demo</a>
+    </div>
+    <div class="nav-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Particle Trail Container -->
+<div class="bubbly-particle-trail">
+  <div class="particles"></div>
+</div>
+
+<section class="doctor-profile-section">
+  <div class="doctor-profile">
+    <img id="doctorImage" src="https://via.placeholder.com/200" alt="Doctor Image">
+    <div class="doctor-info">
+      <h1 id="doctorName">Doctor Name</h1>
+      <p id="doctorSpecialty" class="specialty">Specialty</p>
+      <p id="doctorHospital" class="hospital">Hospital</p>
+      <p id="doctorQualifications" class="qualifications">Qualifications</p>
+      <div class="doctor-actions">
+        <button class="contact-btn">Contact</button>
+        <button class="appointment-btn">Book Appointment</button>
+      </div>
+    </div>
+  </div>
+  <div class="doctor-details">
+    <h2>About</h2>
+    <p id="doctorAbout">Detailed information about the doctor...</p>
+  </div>
+</section>
+
+<script src="js.script/doctor-profile.js"></script>
+<script type="module" src="js.script/script.js"></script>
+</body>
+</html>

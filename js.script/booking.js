@@ -1,44 +1,164 @@
 document.addEventListener('DOMContentLoaded', function () {
   const clinicDoctors = {
     'Clinic Tuah': [
-      { type: 'General Practitioner', name: 'Dr. Ahmad Hassan' },
-      { type: 'Family Physician', name: 'Dr. Fatima Rahman' },
-      { type: 'Internal Medicine Specialist', name: 'Dr. Mehdi Khan' },
-      { type: 'Emergency Physician', name: 'Dr. Zainab Ali' }
+      {
+        slug: 'dr-ahmad-hassan',
+        name: 'Dr. Ahmad Hassan',
+        type: 'General Practitioner',
+        specialty: 'General Medicine',
+        hospital: 'Clinic Tuah',
+        image: 'https://via.placeholder.com/150?text=Ahmad'
+      },
+      {
+        slug: 'dr-fatima-rahman',
+        name: 'Dr. Fatima Rahman',
+        type: 'Family Physician',
+        specialty: 'Family Medicine',
+        hospital: 'Clinic Tuah',
+        image: 'https://via.placeholder.com/150?text=Fatima'
+      },
+      {
+        slug: 'dr-mehdi-khan',
+        name: 'Dr. Mehdi Khan',
+        type: 'Internal Medicine Specialist',
+        specialty: 'Internal Medicine',
+        hospital: 'Clinic Tuah',
+        image: 'https://via.placeholder.com/150?text=Mehdi'
+      }
     ],
     'Cosmetic clinic Whooper': [
-      { type: 'Plastic Surgeon', name: 'Dr. Johan Aziz' },
-      { type: 'Cosmetic Surgeon', name: 'Dr. Siti Nurhaliza' },
-      { type: 'Dermatologist', name: 'Dr. Akyas M' },
-      { type: 'Aesthetic Physician', name: 'Dr. Aisha Mohamed' }
+      {
+        slug: 'dr-johan-aziz',
+        name: 'Dr. Johan Aziz',
+        type: 'Plastic Surgeon',
+        specialty: 'Plastic Surgery',
+        hospital: 'Cosmetic clinic Whooper',
+        image: 'https://via.placeholder.com/150?text=Johan'
+      },
+      {
+        slug: 'dr-siti-nurhaliza',
+        name: 'Dr. Siti Nurhaliza',
+        type: 'Cosmetic Surgeon',
+        specialty: 'Cosmetic Surgery',
+        hospital: 'Cosmetic clinic Whooper',
+        image: 'https://via.placeholder.com/150?text=Siti'
+      },
+      {
+        slug: 'dr-akyas-m',
+        name: 'Dr. Akyas M',
+        type: 'Dermatologist',
+        specialty: 'Dermatology',
+        hospital: 'Cosmetic clinic Whooper',
+        image: 'https://via.placeholder.com/150?text=Akyas'
+      }
     ],
     'Dental Clinic Amru': [
-      { type: 'Cosmetic Dentist', name: 'Dr. Chen Wei' },
-      { type: 'Prosthodontist', name: 'Dr. Lily Wong' },
-      { type: 'Endodontist', name: 'Dr. Akmal Ali' }
+      {
+        slug: 'dr-chen-wei',
+        name: 'Dr. Chen Wei',
+        type: 'Cosmetic Dentist',
+        specialty: 'Cosmetic Dentistry',
+        hospital: 'Dental Clinic Amru',
+        image: 'https://via.placeholder.com/150?text=Chen'
+      },
+      {
+        slug: 'dr-lily-wong',
+        name: 'Dr. Lily Wong',
+        type: 'Prosthodontist',
+        specialty: 'Prosthodontics',
+        hospital: 'Dental Clinic Amru',
+        image: 'https://via.placeholder.com/150?text=Lily'
+      },
+      {
+        slug: 'dr-akmal-ali',
+        name: 'Dr. Akmal Ali',
+        type: 'Endodontist',
+        specialty: 'Endodontics',
+        hospital: 'Dental Clinic Amru',
+        image: 'https://via.placeholder.com/150?text=Akmal'
+      }
     ],
     'kids clinic ISka': [
-      { type: 'Pediatrician', name: 'Dr. Priya Sharma' },
-      { type: 'Child Psychologist', name: 'Dr. Vikram Singh' },
-      { type: 'Pediatric Surgeon', name: 'Dr. Kavya Patel' },
-      { type: 'Neonatologist', name: 'Dr. Arjun Nair' }
+      {
+        slug: 'dr-priya-sharma',
+        name: 'Dr. Priya Sharma',
+        type: 'Pediatrician',
+        specialty: 'Pediatrics',
+        hospital: 'kids clinic ISka',
+        image: 'https://via.placeholder.com/150?text=Priya'
+      },
+      {
+        slug: 'dr-vikram-singh',
+        name: 'Dr. Vikram Singh',
+        type: 'Child Psychologist',
+        specialty: 'Child Psychology',
+        hospital: 'kids clinic ISka',
+        image: 'https://via.placeholder.com/150?text=Vikram'
+      },
+      {
+        slug: 'dr-kavya-patel',
+        name: 'Dr. Kavya Patel',
+        type: 'Pediatric Surgeon',
+        specialty: 'Pediatric Surgery',
+        hospital: 'kids clinic ISka',
+        image: 'https://via.placeholder.com/150?text=Kavya'
+      }
     ]
   };
 
-  const clinic = localStorage.getItem('selectedClinic') || 'Unknown Clinic';
-  const doctorNameMap = {};
+  const clinicSelect = document.getElementById('clinicSelect');
+  const doctorGrid = document.getElementById('doctorGrid');
+  const clinic = localStorage.getItem('selectedClinic') || Object.keys(clinicDoctors)[0];
+  let doctorNameMap = {};
   const clinicNameElement = document.getElementById('clinicName');
   const doctorTypeSelect = document.getElementById('doctorType');
   const doctorNameDisplay = document.getElementById('doctorName');
   const bookingForm = document.querySelector('form.form');
 
-  if (clinicNameElement) {
-    clinicNameElement.innerText = 'Booking at: ' + clinic;
+  function updateClinicText(selectedClinic) {
+    if (clinicNameElement) {
+      clinicNameElement.innerText = 'Booking at: ' + selectedClinic;
+    }
   }
 
-  function populateDoctors() {
-    const doctors = clinicDoctors[clinic] || [];
+  function renderClinicOptions() {
+    Object.keys(clinicDoctors).forEach((clinicName) => {
+      const option = document.createElement('option');
+      option.value = clinicName;
+      option.text = clinicName;
+      clinicSelect.appendChild(option);
+    });
+    clinicSelect.value = clinic;
+  }
 
+  function renderDoctorGrid(selectedClinic) {
+    const doctors = clinicDoctors[selectedClinic] || [];
+    doctorGrid.innerHTML = '';
+
+    if (!doctors.length) {
+      doctorGrid.innerHTML = '<p class="no-doctors">No doctors are available for this clinic.</p>';
+      return;
+    }
+
+    doctors.forEach((doctor) => {
+      const card = document.createElement('div');
+      card.className = 'doctor-card';
+      card.innerHTML = `
+        <img src="${doctor.image}" alt="${doctor.name}">
+        <h3>${doctor.name}</h3>
+        <p class="specialty">${doctor.specialty}</p>
+        <p class="hospital">${doctor.hospital}</p>
+        <button class="view-profile-btn" onclick="viewDoctorProfile('${doctor.slug}')">View Profile</button>
+      `;
+      doctorGrid.appendChild(card);
+    });
+  }
+
+  function populateDoctors(selectedClinic) {
+    doctorTypeSelect.innerHTML = '<option value="">-- Select Doctor Type --</option>';
+    const doctors = clinicDoctors[selectedClinic] || [];
+
+    doctorNameMap = {};
     doctors.forEach((doctorObj) => {
       const option = document.createElement('option');
       option.value = doctorObj.type;
@@ -58,13 +178,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function handleClinicChange(event) {
+    const selectedClinic = event.target.value;
+    localStorage.setItem('selectedClinic', selectedClinic);
+    updateClinicText(selectedClinic);
+    populateDoctors(selectedClinic);
+    renderDoctorGrid(selectedClinic);
+    doctorNameDisplay.innerText = '-- Select a doctor type --';
+  }
+
   function saveBooking(event) {
     event.preventDefault();
 
+    const selectedClinic = clinicSelect.value;
     const doctorType = doctorTypeSelect.value;
     const doctorName = doctorNameMap[doctorType] || '';
     const booking = {
-      clinic,
+      clinic: selectedClinic,
       doctorType,
       doctorName,
       name: document.getElementById('userName').value,
@@ -80,6 +210,10 @@ document.addEventListener('DOMContentLoaded', function () {
     window.location.href = 'confirm.html';
   }
 
+  if (clinicSelect) {
+    clinicSelect.addEventListener('change', handleClinicChange);
+  }
+
   if (doctorTypeSelect) {
     doctorTypeSelect.addEventListener('change', showDoctorName);
   }
@@ -88,7 +222,10 @@ document.addEventListener('DOMContentLoaded', function () {
     bookingForm.addEventListener('submit', saveBooking);
   }
 
-  populateDoctors();
+  renderClinicOptions();
+  updateClinicText(clinic);
+  populateDoctors(clinic);
+  renderDoctorGrid(clinic);
 
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
@@ -114,4 +251,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // Function to view doctor profile
+  window.viewDoctorProfile = function(doctorSlug) {
+    window.location.href = `doctor-profile.html?doctor=${doctorSlug}`;
+  };
 });
