@@ -36,9 +36,10 @@
 <h2 id="clinicName"></h2>
 
 <form onsubmit="saveBooking(event)" class="form">
-  <input type="text" placeholder="Your Name" required>
-  <input type="text" placeholder="Phone Number" required>
-  <input type="text" placeholder="Your IC number without (-)" required>
+  <input type="text" id="userName" placeholder="Your Name" required>
+  <input type="text" id="userPhone" placeholder="Phone Number" required>
+  <input type="text" id="userIC" placeholder="Your IC number without (-)" required>
+  <input type="email" id="userEmail" placeholder="Your Email Address" required>
   
   <label for="doctorType">Doctor Type:</label>
   <select id="doctorType" required onchange="showDoctorName()">
@@ -51,8 +52,8 @@
   <label for="painDescription">Describe Your Pain/Symptoms:</label>
   <textarea id="painDescription" placeholder="Please describe your pain, symptoms, or health concerns in detail..." rows="5" required></textarea>
   
-  <input type="date" required>
-  <input type="time" required>
+  <input type="date" id="bookingDate" required>
+  <input type="time" id="bookingTime" required>
   <button type="submit">Confirm Booking</button>
 </form>
 
@@ -85,11 +86,10 @@
   };
 
   let clinic = localStorage.getItem("selectedClinic");
-  let doctorNameMap = {}; // Store doctor names for quick lookup
+  let doctorNameMap = {};
   
   document.getElementById("clinicName").innerText = "Booking at: " + clinic;
 
-  // Populate doctor types based on selected clinic
   function populateDoctors() {
     let doctorSelect = document.getElementById("doctorType");
     let doctors = clinicDoctors[clinic] || [];
@@ -99,13 +99,10 @@
       option.value = doctorObj.type;
       option.text = doctorObj.type;
       doctorSelect.appendChild(option);
-      
-      // Store the doctor name for this type
       doctorNameMap[doctorObj.type] = doctorObj.name;
     });
   }
 
-  // Show doctor name when type is selected
   function showDoctorName() {
     let selectedType = document.getElementById("doctorType").value;
     let doctorNameDisplay = document.getElementById("doctorName");
@@ -117,13 +114,11 @@
     }
   }
 
-  // Load doctors on page load
   populateDoctors();
 
   function saveBooking(e) {
     e.preventDefault();
 
-    let inputs = document.querySelectorAll("input");
     let doctorType = document.getElementById("doctorType").value;
     let doctorName = doctorNameMap[doctorType] || "";
     let painDescription = document.getElementById("painDescription").value;
@@ -132,23 +127,22 @@
       clinic: clinic,
       doctorType: doctorType,
       doctorName: doctorName,
-      name: inputs[0].value,
-      phone: inputs[1].value,
-      icNumber: inputs[2].value,
+      name: document.getElementById("userName").value,
+      phone: document.getElementById("userPhone").value,
+      icNumber: document.getElementById("userIC").value,
+      email: document.getElementById("userEmail").value,
       painDescription: painDescription,
-      date: inputs[3].value,
-      time: inputs[4].value
+      date: document.getElementById("bookingDate").value,
+      time: document.getElementById("bookingTime").value
     };
 
     localStorage.setItem("bookingData", JSON.stringify(booking));
-
     window.location.href = "confirm.html";
   }
 </script>
 
 <!-- Navigation Script -->
 <script>
-  // Mobile menu toggle functionality
   document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -159,7 +153,6 @@
         navMenu.classList.toggle('active');
       });
 
-      // Close mobile menu when clicking on a link
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -168,7 +161,6 @@
         });
       });
 
-      // Close mobile menu when clicking outside
       document.addEventListener('click', function(event) {
         if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
           navToggle.classList.remove('active');

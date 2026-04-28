@@ -39,9 +39,14 @@
   <p id="details"></p>
 </div>
 
+<p id="emailStatus" style="text-align:center; margin-top:12px; font-size:14px; color:gray;">Sending confirmation email...</p>
+
 <a href="index.html" class="btn">Back to Home</a>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  emailjs.init("EFNQAwKhe4o6pyY0Z");
+
   let data = JSON.parse(localStorage.getItem("bookingData"));
 
   document.getElementById("details").innerHTML = `
@@ -51,16 +56,32 @@
     <b>Patient Name:</b> ${data.name} <br>
     <b>Phone:</b> ${data.phone} <br>
     <b>IC Number:</b> ${data.icNumber} <br>
-    <b>Pain/Symptoms:</b> <br>
-    <p style="text-align: left; background: #f8f9fa; padding: 12px; border-radius: 8px;">${data.painDescription}</p>
+    <b>Pain/Symptoms:</b>
+    <p style="text-align:left; background:#f8f9fa; padding:12px; border-radius:8px;">${data.painDescription}</p>
     <b>Date:</b> ${data.date} <br>
     <b>Time:</b> ${data.time}
   `;
+
+    emailjs.send("service_v3ot97g", "template_5uq33qr", {
+    user_name: data.name,
+    clinic_name: data.clinic,
+    doctor_type: data.doctorType,
+    doctor_name: data.doctorName,
+    booking_date: data.date,
+    booking_time: data.time,
+    user_email: data.email
+  }).then(() => {
+    document.getElementById("emailStatus").style.color = "green";
+    document.getElementById("emailStatus").innerText = "✅ Confirmation email sent to " + data.email;
+  }).catch((err) => {
+    document.getElementById("emailStatus").style.color = "red";
+    document.getElementById("emailStatus").innerText = "❌ Email failed to send.";
+    console.error("EmailJS error:", err);
+  });
 </script>
 
 <!-- Navigation Script -->
 <script>
-  // Mobile menu toggle functionality
   document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -71,7 +92,6 @@
         navMenu.classList.toggle('active');
       });
 
-      // Close mobile menu when clicking on a link
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -80,7 +100,6 @@
         });
       });
 
-      // Close mobile menu when clicking outside
       document.addEventListener('click', function(event) {
         if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
           navToggle.classList.remove('active');
