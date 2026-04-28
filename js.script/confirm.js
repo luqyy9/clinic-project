@@ -37,9 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }).catch((err) => {
       if (emailStatusElement) {
         emailStatusElement.style.color = 'red';
-        emailStatusElement.innerText = '❌ Email failed to send.';
+        emailStatusElement.innerText = '❌ Email failed to send. You can use the button below to send manually.';
       }
       console.error('EmailJS error:', err);
+      createManualEmailLink(data);
     });
   } else if (emailStatusElement) {
     emailStatusElement.style.color = 'red';
@@ -74,4 +75,27 @@ function attachNavHandlers() {
       navMenu.classList.remove('active');
     }
   });
+}
+
+function createManualEmailLink(data) {
+  if (!data.email) return;
+  const emailStatusElement = document.getElementById('emailStatus');
+  const fallbackContainer = document.createElement('div');
+  fallbackContainer.style.textAlign = 'center';
+  fallbackContainer.style.marginTop = '16px';
+  fallbackContainer.innerHTML = `
+    <p>If automatic email sending fails, open your email client manually:</p>
+    <a id="manualEmailLink" class="btn" href="#">Send Email Manually</a>
+  `;
+
+  if (emailStatusElement && emailStatusElement.parentNode) {
+    emailStatusElement.parentNode.appendChild(fallbackContainer);
+    const subject = encodeURIComponent('Appointment Confirmation - ' + (data.clinic || 'Clinic'));
+    const body = encodeURIComponent(
+      `Hello ${data.name || 'Patient'},\n\nYour appointment has been confirmed.\n\nClinic: ${data.clinic || ''}\nDoctor Type: ${data.doctorType || ''}\nDoctor Name: ${data.doctorName || ''}\nDate: ${data.date || ''}\nTime: ${data.time || ''}\n\nThank you,\nWOWClinicFinder`
+    );
+    const mailtoLink = `mailto:${data.email}?subject=${subject}&body=${body}`;
+    const manualEmailLink = document.getElementById('manualEmailLink');
+    if (manualEmailLink) manualEmailLink.href = mailtoLink;
+  }
 }
