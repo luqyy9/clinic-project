@@ -111,6 +111,7 @@ function showClinics(list) {
   list.forEach(clinic => {
     let marker = L.marker([clinic.lat, clinic.lng])
       .addTo(map)
+      .bindTooltip(clinic.name)
       .bindPopup(`
         <b>${clinic.name}</b><br>
         <p style="font-size:12px; color:gray;">${clinic.description}</p>
