@@ -127,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
       specialty: 'Pediatric Surgery',
       hospital: 'kids clinic ISka',
       qualifications: 'MBBS, Pediatric Surgeon',
-      about: 'Dr. Kavya Patel performs pediatric surgical care with compassion and precision for young patients.'
+      about: 'Dr. Kavya Patel performs pediatric surgical care with compassion and precision for young patients.',
+      doctorImage: 'pic/my%20picture.jpg'
     }
   };
 
@@ -139,7 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('doctorQualifications').textContent = doctor.qualifications;
     document.getElementById('doctorAbout').textContent = doctor.about;
     // You can set a specific image if available, for now using placeholder
-    document.getElementById('doctorImage').src = `https://via.placeholder.com/200?text=${encodeURIComponent(doctor.name.split(' ')[0])}`;
+    if (doctor.doctorImage) {
+      document.getElementById('doctorImage').src = doctor.doctorImage;
+    } else {
+      document.getElementById('doctorImage').src = `https://via.placeholder.com/200?text=${encodeURIComponent(doctor.name.split(' ')[0])}`;
+    }
   } else {
     document.querySelector('.doctor-profile-section').innerHTML = '<h2>Doctor not found</h2>';
   }
