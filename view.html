@@ -43,33 +43,37 @@
 <a href="index.html" class="btn">Back Home</a>
 
 <script>
-  let data = JSON.parse(localStorage.getItem("bookingData"));
+  let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
   let deleteButton = document.getElementById("deleteBooking");
+  let detailsEl = document.getElementById("details");
 
-  if (data) {
-    document.getElementById("details").innerHTML = `
-      <b>Clinic:</b> ${data.clinic} <br>
-      <b>Doctor Type:</b> ${data.doctorType} <br>
-      <b>Doctor Name:</b> ${data.doctorName} <br>
-      <b>Patient Name:</b> ${data.name} <br>
-      <b>Phone:</b> ${data.phone} <br>
-      <b>IC Number:</b> ${data.icNumber} <br>
-      <b>Pain/Symptoms:</b> <br>
-      <p style="text-align: left; background: #f8f9fa; padding: 12px; border-radius: 8px;">${data.painDescription}</p>
-      <b>Date:</b> ${data.date} <br>
-      <b>Time:</b> ${data.time}
-    `;
-    deleteButton.style.display = "inline-block";
+  if (bookings.length === 0) {
+    detailsEl.innerText = "No bookings found.";
   } else {
-    document.getElementById("details").innerText = "No booking found.";
+    detailsEl.innerHTML = bookings.map((data, index) => `
+      <div style="border:1px solid #ddd; padding:12px; border-radius:8px; margin-bottom:12px;">
+        <b>Booking #${index + 1}</b><br>
+        <b>Clinic:</b> ${data.clinic} <br>
+        <b>Doctor Type:</b> ${data.doctorType} <br>
+        <b>Doctor Name:</b> ${data.doctorName} <br>
+        <b>Patient Name:</b> ${data.name} <br>
+        <b>Phone:</b> ${data.phone} <br>
+        <b>IC Number:</b> ${data.icNumber} <br>
+        <b>Pain/Symptoms:</b>
+        <p style="text-align:left; background:#f8f9fa; padding:12px; border-radius:8px;">${data.painDescription}</p>
+        <b>Date:</b> ${data.date} <br>
+        <b>Time:</b> ${data.time} <br>
+        <button onclick="deleteBooking(${index})" class="btn" style="margin-top:8px; background:red; color:white;">Delete</button>
+      </div>
+    `).join('');
   }
 
-  deleteButton.addEventListener("click", function() {
-    localStorage.removeItem("bookingData");
-    localStorage.removeItem("selectedClinic");
-    document.getElementById("details").innerText = "No booking found.";
-    deleteButton.style.display = "none";
-  });
+  function deleteBooking(index) {
+    let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+    bookings.splice(index, 1);
+    localStorage.setItem("bookingList", JSON.stringify(bookings));
+    location.reload();
+  }
 </script>
 
 <!-- Navigation Script -->
@@ -105,6 +109,6 @@
   });
 </script>
 
-<script type="module" src="script.js"></script>
+<script type="module" src="js.script/script.js"></script>
 </body>
 </html>

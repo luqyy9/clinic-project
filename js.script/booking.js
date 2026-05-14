@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         type: 'General Practitioner',
         specialty: 'General Medicine',
         hospital: 'Clinic Tuah',
-        image: 'https://via.placeholder.com/150?text=Ahmad'
+        image: 'image/a.jpg'
       },
       {
         slug: 'dr-fatima-rahman',
@@ -187,29 +187,62 @@ document.addEventListener('DOMContentLoaded', function () {
     doctorNameDisplay.innerText = '-- Select a doctor type --';
   }
 
-  function saveBooking(event) {
+function saveBooking(event) {
     event.preventDefault();
 
     const selectedClinic = clinicSelect.value;
     const doctorType = doctorTypeSelect.value;
     const doctorName = doctorNameMap[doctorType] || '';
+
+    // Validation inputs
+    const ic = document.getElementById('userIC').value;
+    const phone = document.getElementById('userPhone').value;
+    const date = document.getElementById('bookingDate').value;
+
+    // IC validation
+    if (!/^\d{12}$/.test(ic)) {
+      alert('IC number must be exactly 12 digits with no dashes.');
+      return;
+    }
+
+    // Malaysian phone validation
+    if (!/^01[0-9]{8,9}$/.test(phone)) {
+      alert('Phone number must be Malaysian format e.g. 0123456789');
+      return;
+    }
+
+    // Date validation
+    const today = new Date().toISOString().split('T')[0];
+
+    if (date < today) {
+      alert('Please select a future date.');
+      return;
+    }
+
+    // Booking object
     const booking = {
       clinic: selectedClinic,
       doctorType,
       doctorName,
       name: document.getElementById('userName').value,
-      phone: document.getElementById('userPhone').value,
-      icNumber: document.getElementById('userIC').value,
+      phone: phone,
+      icNumber: ic,
       email: document.getElementById('userEmail').value,
       painDescription: document.getElementById('painDescription').value,
-      date: document.getElementById('bookingDate').value,
+      date: date,
       time: document.getElementById('bookingTime').value
     };
 
-    localStorage.setItem('bookingData', JSON.stringify(booking));
-    window.location.href = 'confirm.html';
-  }
+    // Save multiple bookings
+    const existing = JSON.parse(localStorage.getItem('bookingList')) || [];
+    existing.push(booking);
 
+    localStorage.setItem('bookingList', JSON.stringify(existing));
+
+    // Redirect
+    window.location.href = 'confirm.html';
+}
+  
   if (clinicSelect) {
     clinicSelect.addEventListener('change', handleClinicChange);
   }
@@ -255,5 +288,5 @@ document.addEventListener('DOMContentLoaded', function () {
   // Function to view doctor profile
   window.viewDoctorProfile = function(doctorSlug) {
     window.location.href = `doctor-profile.html?doctor=${doctorSlug}`;
-  };
+    };
 });

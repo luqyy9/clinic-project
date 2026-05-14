@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
       hospital: 'Clinic Tuah',
       qualifications: 'MBBS, General Practitioner',
       about: 'Dr. Ahmad Hassan is a friendly general practitioner serving Clinic Tuah patients with a focus on family care and preventive medicine.'
+      doctorImage: 'image/a.jpg'
     },
     'dr-fatima-rahman': {
       name: 'Dr. Fatima Rahman',
