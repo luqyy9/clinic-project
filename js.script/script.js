@@ -146,3 +146,20 @@ const ParticleTrail = {
 }
 
 ParticleTrail.init()
+
+fetch('doctors.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Doctors JSON Loaded:', data)
+  })
+  .catch(error => {
+    console.error('JSON fetch error:', error)
+  })
+  fetch('https://nominatim.openstreetmap.org/search?q=clinic+in+kuantan&format=json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Real clinic data:', data)
+  })
+  .catch(error => {
+    console.error(error)
+  })

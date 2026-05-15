@@ -18,6 +18,7 @@
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link">Find Clinics</a>
       <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="admin.html" class="nav-link">Admin Panel</a>
       <a href="cursor.html" class="nav-link">Interactive Demo</a>
     </div>
     <div class="nav-toggle">
@@ -39,12 +40,21 @@
   <p id="details"></p>
 </div>
 
-<p id="emailStatus" style="text-align:center; margin-top:12px; font-size:14px; color:gray;">Sending confirmation email...</p>
+<p id="emailStatus" style="text-align:center; margin-top:12px; font-size:14px; color:gray;">
+  Sending confirmation email...
+</p>
+
+<a id="whatsappBtn" class="btn" target="_blank" style="display:block; margin:15px auto; width:fit-content;">
+  Contact via WhatsApp
+</a>
 
 <a href="index.html" class="btn">Back to Home</a>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js.script/confirm.js"></script>
-<script type="module" src="script.js"></script>
+<script type="module" src="js.script/script.js"></script>
+<p class="feature-note">
+  📧 Automatic email confirmation will be sent after booking.
+</p>
 </body>
 </html>

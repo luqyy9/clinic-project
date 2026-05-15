@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   emailjs.init('EFNQAwKhe4o6pyY0Z');
 
-  const data = JSON.parse(localStorage.getItem('bookingData')) || {};
+  const bookings = JSON.parse(localStorage.getItem('bookingList')) || [];
+  const data = bookings[bookings.length - 1] || {};
   const detailsElement = document.getElementById('details');
   const emailStatusElement = document.getElementById('emailStatus');
 
