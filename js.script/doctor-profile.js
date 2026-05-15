@@ -44,15 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
       hospital: 'KPJ Kuala Selangor Specialist Hospital',
       qualifications: 'MBBS (CUCMS), DRANAES&CRIT.CARE (UKM)',
       about: 'Dr. Aamir specializes in Anaesthesiology and Critical Care. He ensures patient safety during surgeries and manages critical care units.'
-    },
-    'dr-ahmad-hassan': {
-      name: 'Dr. Ahmad Hassan',
-      specialty: 'General Medicine',
-      hospital: 'Clinic Tuah',
-      qualifications: 'MBBS, General Practitioner',
-      about: 'Dr. Ahmad Hassan is a friendly general practitioner serving Clinic Tuah patients with a focus on family care and preventive medicine.'
-      doctorImage: 'image/a.jpg'
-    },
+    },'dr-ahmad-hassan': {
+  name: 'Dr. Ahmad Hassan',
+  specialty: 'General Medicine',
+  hospital: 'Clinic Tuah',
+  qualifications: 'MBBS, General Practitioner',
+  about: 'Dr. Ahmad Hassan is a friendly general practitioner serving Clinic Tuah patients with a focus on family care and preventive medicine.',
+  doctorImage: 'image/a.jpg'
+},
     'dr-fatima-rahman': {
       name: 'Dr. Fatima Rahman',
       specialty: 'Family Medicine',

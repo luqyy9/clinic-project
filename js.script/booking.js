@@ -230,7 +230,8 @@ function saveBooking(event) {
       email: document.getElementById('userEmail').value,
       painDescription: document.getElementById('painDescription').value,
       date: date,
-      time: document.getElementById('bookingTime').value
+      time: document.getElementById('bookingTime').value,
+      status: 'Pending'
     };
 
     // Save multiple bookings

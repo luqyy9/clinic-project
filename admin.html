@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Booking</title>
+  <<title>WOWClinicFinder - Admin Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
     <div class="nav-menu">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link">Find Clinics</a>
-      <a href="view.html" class="nav-link active">My Bookings</a>
+      <a href="view.html" class="nav-link active">Clinic Admin Dashboard</a>
       <a href="cursor.html" class="nav-link">Interactive Demo</a>
     </div>
     <div class="nav-toggle">
@@ -64,6 +64,9 @@
 <b>Date:</b> ${data.date} <br>
 <b>Time:</b> ${data.time} <br>
 <b>Status:</b> ${data.status} <br>
+<button onclick="approveBooking(${index})" class="btn" style="margin-top:8px; background:green; color:white;">
+  Approve
+</button>
         <button onclick="deleteBooking(${index})" class="btn" style="margin-top:8px; background:red; color:white;">Delete</button>
       </div>
     `).join('');
