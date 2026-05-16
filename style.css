@@ -267,7 +267,7 @@ main {
   text-align: center;
   padding: 80px 20px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   margin: 40px auto;
   max-width: 1200px;
@@ -362,7 +362,7 @@ main {
 .about {
   padding: 60px 20px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
   margin: 40px auto;
   max-width: 1000px;
   border-radius: 15px;
@@ -560,7 +560,7 @@ main {
 .features {
   padding: 80px 20px;
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
   margin: 40px auto;
   max-width: 1200px;
   border-radius: 15px;
@@ -736,7 +736,7 @@ main {
   max-width: 1120px;
   border-radius: 30px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
 }
 
 .doctor-profile,
