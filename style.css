@@ -147,11 +147,12 @@ a:focus, button:focus, select:focus, input:focus, textarea:focus {
 .table-responsive {
   overflow-x: auto;
   margin: 20px auto;
-  max-width: 100%;
+  width: 100%;
 }
 
 .appointment-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   background: white;
   border-radius: 8px;
@@ -161,12 +162,14 @@ a:focus, button:focus, select:focus, input:focus, textarea:focus {
 }
 
 .appointment-table th, .appointment-table td {
+  vertical-align: middle;
   padding: 12px 15px;
   border-bottom: 1px solid #e0e0e0;
 }
 
 .appointment-table th {
   background-color: var(--primary-purple);
+  white-space: nowrap;
   color: white;
   font-weight: 600;
 }
@@ -1684,4 +1687,49 @@ header, main, .form, .card {
     font-size: 2rem;
   }
 }
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 400px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+}
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-approved {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+.confirm-card {
+    max-width: 700px;
+    padding: 25px;
+}
+
+.confirm-card p {
+    margin-bottom: 10px;
+    .appointment-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background: white;
+}
+
+.appointment-table th,
+.appointment-table td {
+    vertical-align: middle;
 }

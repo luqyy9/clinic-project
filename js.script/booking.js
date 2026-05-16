@@ -119,11 +119,16 @@ document.addEventListener('DOMContentLoaded', async function () {
       alert('Please select a future date.');
       return;
     }
+const doctors = clinicDoctors[selectedClinic] || [];
 
+const selectedDoctor = doctors.find(
+  doctor => doctor.type === doctorType
+);
     const booking = {
       clinic: selectedClinic,
       doctorType,
       doctorName,
+      doctorImage: selectedDoctor?.image || 'image/default.jpg',
       name: document.getElementById('userName').value,
       phone,
       icNumber: ic,

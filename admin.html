@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <<title>WOWClinicFinder - Admin Dashboard</title>
+  <title>WOWClinicFinder - Admin Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,6 +35,10 @@
 
 <h2>📋 My Appointment</h2>
 
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search patient, doctor, clinic, or status">
+</div>
+
 <div class="card table-responsive">
   <table class="appointment-table" aria-label="Current Appointments List">
     <thead>
@@ -45,6 +49,7 @@
         <th scope="col">Doctor</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
+        <th scope="col">Status</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -58,24 +63,117 @@
   const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
   const tableBody = document.getElementById("bookingTableBody");
 
-  if (bookings.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:14px;">No appointments found.</td></tr>`;
-  } else {
-    tableBody.innerHTML = bookings.map((data, index) => `
+function displayBookings(filteredBookings) {
+
+  if (filteredBookings.length === 0) {
+
+    tableBody.innerHTML = `
       <tr>
-        <td><strong>${data.name || 'N/A'}</strong><br><small>IC: ${data.icNumber || 'N/A'}</small></td>
-        <td>${data.phone || 'N/A'}</td>
-        <td>${data.clinic || data.clinicName || 'N/A'}</td>
-        <td><strong>${data.doctorType || data.doctor || 'N/A'}</strong><br><small>${data.doctorName || data.doctor || ''}</small></td>
-        <td>${data.date || 'N/A'}</td>
-        <td>${data.time || 'N/A'}</td>
-        <td>
-          <button onclick="approveBooking(${index})" class="btn" style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">Approve</button>
-          <button onclick="deleteBooking(${index})" class="btn" style="background:red; padding:6px 12px; font-size:12px;">Delete</button>
+        <td colspan="7" style="text-align:center; padding:14px;">
+          No appointments found.
         </td>
+      </tr>
+    `;
+
+  } else {
+
+    tableBody.innerHTML = filteredBookings.map((data, index) => `
+      <tr>
+        <td>
+          <strong>${data.name || 'N/A'}</strong>
+          <br>
+          <small>IC: ${data.icNumber || 'N/A'}</small>
+        </td>
+
+        <td>${data.phone || 'N/A'}</td>
+
+        <td>${data.clinic || data.clinicName || 'N/A'}</td>
+
+        <td>
+<td>
+
+  <img 
+    src="${data.doctorImage || 'image/default.jpg'}"
+    alt="Doctor Image"
+    style="
+      width:60px;
+      height:60px;
+      object-fit:cover;
+      border-radius:50%;
+      margin-bottom:8px;
+    "
+  >
+
+  <br>
+
+  <strong>${data.doctorType || data.doctor || 'N/A'}</strong>
+
+  <br>
+
+  <small>${data.doctorName || data.doctor || ''}</small>
+
+</td>
+        </td>
+
+        <td>${data.date || 'N/A'}</td>
+
+        <td>${data.time || 'N/A'}</td>
+        <td class="status-${(data.status || 'Pending').toLowerCase()}">
+  ${data.status || 'Pending'}
+</td>
+<td>
+
+  <button onclick="approveBooking(${index})"
+    class="btn"
+    style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">
+
+    Approve
+  </button>
+
+  <button onclick="rejectBooking(${index})"
+    class="btn"
+    style="background:orange; padding:6px 12px; font-size:12px; margin-bottom:4px;">
+
+    Reject
+  </button>
+
+  <button onclick="deleteBooking(${index})"
+    class="btn"
+    style="background:red; padding:6px 12px; font-size:12px;">
+
+    Delete
+  </button>
+
+</td>
+ 
+
       </tr>
     `).join('');
   }
+}
+
+displayBookings(bookings);
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+
+  const value = searchInput.value.toLowerCase();
+
+  const filteredBookings = bookings.filter(data =>
+
+    (data.name || '').toLowerCase().includes(value) ||
+
+    (data.doctor || '').toLowerCase().includes(value) ||
+
+    (data.doctorName || '').toLowerCase().includes(value) ||
+
+    (data.clinic || '').toLowerCase().includes(value) ||
+
+    (data.status || '').toLowerCase().includes(value)
+  );
+
+  displayBookings(filteredBookings);
+});
   function approveBooking(index) {
   let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
 
@@ -101,12 +199,47 @@
     location.reload();
   });
 }
-  function deleteBooking(index) {
-    let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
-    bookings.splice(index, 1);
-    localStorage.setItem("bookingList", JSON.stringify(bookings));
+function rejectBooking(index) {
+
+  let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+
+  bookings[index].status = "Rejected";
+
+  localStorage.setItem("bookingList", JSON.stringify(bookings));
+
+  emailjs.send('service_v3ot97g', 'template_5uq33qr', {
+
+    user_name: bookings[index].name,
+
+    clinic_name: bookings[index].clinic || bookings[index].clinicName || '',
+
+    doctor_type: bookings[index].doctorType || bookings[index].doctor || '',
+
+    doctor_name: bookings[index].doctorName || bookings[index].doctor || '',
+
+    booking_date: bookings[index].date,
+
+    booking_time: bookings[index].time,
+
+    user_email: bookings[index].email,
+
+    status: 'Rejected'
+
+  }).then(() => {
+
+    alert("Booking rejected and email sent!");
+
     location.reload();
-  }
+
+  }).catch((error) => {
+
+    console.error(error);
+
+    alert("Booking rejected but email failed.");
+
+    location.reload();
+  });
+}
 </script>
 
 <!-- Navigation Script -->
