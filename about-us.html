@@ -1,16 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About us</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOWClinicFinder - About Us</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>About Us</h1>
-    <p>Welcome to WOWClinicFinder! We are dedicated to helping you find the best clinics in your area with ease. Our mission is to provide a user-friendly platform that connects patients with healthcare providers, making it easier for you to book appointments and access quality healthcare services.</p>
-    <p>Our team is passionate about improving healthcare accessibility and ensuring that everyone can find the care they need. We work tirelessly to maintain an up-to-date database of clinics and healthcare providers, ensuring that you have access to the most accurate and comprehensive information.</p>
-    <p>Thank you for choosing WOWClinicFinder. We are committed to providing you with   the best experience possible and helping you on your healthcare journey.</p>                    
 
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="index.html">WOWClinicFinder</a>
+    </div>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="map.html" class="nav-link">Find Clinics</a>
+      <a href="view.html" class="nav-link">My Bookings</a>
+      <a href="admin.html" class="nav-link">Admin Panel</a>
+      <a href="about-us.html" class="nav-link active">About Us</a>
+    </div>
+    <button class="nav-toggle" type="button" aria-label="Toggle main menu navigation" aria-expanded="false" aria-controls="navMenu" title="Click to open menu">
+      <span class="bar top-bar"></span>
+      <span class="bar middle-bar"></span>
+      <span class="bar bottom-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="bubbly-particle-trail">
+  <div class="particles"></div>
+</div>
+
+<main class="about-container">
+  <header class="about-header">
+    <h1>Meet Our Team</h1>
+    <p>The innovative minds behind WOWClinicFinder working together to bridge the gap between patients and healthcare providers.</p>
+  </header>
+
+  <section class="bento-grid" aria-label="Team and Mission Inventory Grid">
     
+    <div class="bento-card mission-card">
+      <h2>Our Core Mission</h2>
+      <p>We are dedicated to improving healthcare accessibility across Malaysia. By leveraging advanced web APIs and mapping systems, our platform simplifies the appointment scheduling engine for local medical facilities.</p>
+      <ul class="mission-list">
+        <li>✨ Seamless API Integrations</li>
+        <li>♿ Inclusive OKU System Accessibility</li>
+        <li>🔒 Secure Data Processing Frameworks</li>
+      </ul>
+    </div>
+
+    <div class="bento-card profile-card leader-card">
+      <div class="frame-container">
+        <img class="profile-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80" alt="Sarah Jamil, Project Director Profile Picture">
+      </div>
+      <div class="profile-info">
+        <h3>Sarah Jamil</h3>
+        <span class="role-badge">Project Leader</span>
+        <p>Oversees system execution architectures and ensures alignment with healthcare accessibility requirements.</p>
+        <div class="profile-socials">
+          <a href="#" title="Connect with Sarah on LinkedIn" aria-label="Sarah's LinkedIn Portfolio">🔗 LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento-card profile-card">
+      <div class="frame-container">
+        <img class="profile-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80" alt="Harith Daniel, Software Engineer Profile Picture">
+      </div>
+      <div class="profile-info">
+        <h3>Harith Daniel</h3>
+        <span class="role-badge">Lead Developer</span>
+        <p>Manages backend tracking mechanics, JSON arrays, and asynchronous data operations.</p>
+        <div class="profile-socials">
+          <a href="#" title="View Harith's GitHub profile" aria-label="Harith's GitHub Repository">💻 GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento-card profile-card">
+      <div class="frame-container">
+        <img class="profile-img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80" alt="Aanya Mehta, Interaction Architect Profile Picture">
+      </div>
+      <div class="profile-info">
+        <h3>Aanya Mehta</h3>
+        <span class="role-badge">UI/UX Designer</span>
+        <p>Crafts smooth layouts, structural wireframes, and gorgeous glassmorphic experiences.</p>
+        <div class="profile-socials">
+          <a href="#" title="Explore Aanya's design canvas" aria-label="Aanya's Dribbble Canvas">🎨 Dribbble</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento-card profile-card horizontal-profile">
+      <div class="frame-container">
+        <img class="profile-img" src="https://images.unsplash.com/photo-1628157582853-a796fa650a6a?w=400&auto=format&fit=crop&q=80" alt="Lim Wei Shen, Systems & Information Specialist Profile Picture">
+      </div>
+      <div class="profile-info">
+        <h3>Lim Wei Shen</h3>
+        <span class="role-badge">Healthcare Data Analyst</span>
+        <p>Maintains correctness and verification logic models across global clinic coordinates and data inventories.</p>
+        <div class="profile-socials">
+          <a href="#" title="Connect with Lim on LinkedIn" aria-label="Lim's Business Profile">🔗 LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        const isExpanded = navToggle.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isExpanded);
+      });
+    }
+  });
+</script>
+
+<script type="module" src="js.script/script.js"></script>
 </body>
 </html>

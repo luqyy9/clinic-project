@@ -65,8 +65,8 @@
       <tr>
         <td><strong>${data.name || 'N/A'}</strong><br><small>IC: ${data.icNumber || 'N/A'}</small></td>
         <td>${data.phone || 'N/A'}</td>
-        <td>${data.clinic || 'N/A'}</td>
-        <td><strong>${data.doctorType || 'N/A'}</strong><br><small>${data.doctorName || ''}</small></td>
+        <td>${data.clinic || data.clinicName || 'N/A'}</td>
+        <td><strong>${data.doctorType || data.doctor || 'N/A'}</strong><br><small>${data.doctorName || data.doctor || ''}</small></td>
         <td>${data.date || 'N/A'}</td>
         <td>${data.time || 'N/A'}</td>
         <td>

@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   async function loadClinicData() {
     try {
-      const response = await fetch('clinics.json');
+      const response = await fetch('json file/clinics.json');
       clinicDoctors = await response.json();
     } catch (error) {
-      console.error('Unable to load clinics.json:', error);
+      console.error('Unable to load json file/clinics.json:', error);
       doctorGrid.innerHTML = '<p class="no-doctors">Unable to load clinic data. Please refresh.</p>';
       clinicDoctors = {};
     }
@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function renderClinicOptions() {
-    clinicSelect.innerHTML = '';
+    clinicSelect.innerHTML = '<option value="">-- Select Clinic --</option>';
     Object.keys(clinicDoctors).forEach((clinicName) => {
       const option = document.createElement('option');
       option.value = clinicName;
       option.text = clinicName;
       clinicSelect.appendChild(option);
     });
-    clinicSelect.value = selectedClinic;
+    clinicSelect.value = selectedClinic || '';
   }
 
   function renderDoctorGrid(clinic) {
