@@ -14,18 +14,18 @@
     <div class="nav-logo">
       <a href="index.html">WOWClinicFinder</a>
     </div>
-    <div class="nav-menu">
+    <div class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link">Find Clinics</a>
       <a href="view.html" class="nav-link">My Bookings</a>
       <a href="admin.html" class="nav-link">Admin Panel</a>
       <a href="cursor.html" class="nav-link">Interactive Demo</a>
     </div>
-    <div class="nav-toggle">
+    <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navMenu" type="button">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </div>
+    </button>
   </div>
 </nav>
 
@@ -53,6 +53,42 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js.script/confirm.js"></script>
 <script type="module" src="js.script/script.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      function updateNavExpanded() {
+        const isExpanded = navMenu.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      }
+
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        updateNavExpanded();
+      });
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          updateNavExpanded();
+        });
+      });
+
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          updateNavExpanded();
+        }
+      });
+    }
+  });
+</script>
 <p class="feature-note">
   📧 Automatic email confirmation will be sent after booking.
 </p>

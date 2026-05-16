@@ -1,0 +1,106 @@
+{
+  "Clinic Tuah": [
+    {
+      "slug": "dr-ahmad-hassan",
+      "name": "Dr. Ahmad Hassan",
+      "type": "General Practitioner",
+      "specialty": "General Medicine",
+      "hospital": "Clinic Tuah",
+      "image": "image/a.jpg"
+    },
+    {
+      "slug": "dr-fatima-rahman",
+      "name": "Dr. Fatima Rahman",
+      "type": "Family Physician",
+      "specialty": "Family Medicine",
+      "hospital": "Clinic Tuah",
+      "image": "https://via.placeholder.com/150?text=Fatima"
+    },
+    {
+      "slug": "dr-mehdi-khan",
+      "name": "Dr. Mehdi Khan",
+      "type": "Internal Medicine Specialist",
+      "specialty": "Internal Medicine",
+      "hospital": "Clinic Tuah",
+      "image": "https://via.placeholder.com/150?text=Mehdi"
+    }
+  ],
+  "Cosmetic clinic Whooper": [
+    {
+      "slug": "dr-johan-aziz",
+      "name": "Dr. Johan Aziz",
+      "type": "Plastic Surgeon",
+      "specialty": "Plastic Surgery",
+      "hospital": "Cosmetic clinic Whooper",
+      "image": "https://via.placeholder.com/150?text=Johan"
+    },
+    {
+      "slug": "dr-siti-nurhaliza",
+      "name": "Dr. Siti Nurhaliza",
+      "type": "Cosmetic Surgeon",
+      "specialty": "Cosmetic Surgery",
+      "hospital": "Cosmetic clinic Whooper",
+      "image": "https://via.placeholder.com/150?text=Siti"
+    },
+    {
+      "slug": "dr-akyas-m",
+      "name": "Dr. Akyas M",
+      "type": "Dermatologist",
+      "specialty": "Dermatology",
+      "hospital": "Cosmetic clinic Whooper",
+      "image": "https://via.placeholder.com/150?text=Akyas"
+    }
+  ],
+  "Dental Clinic Amru": [
+    {
+      "slug": "dr-chen-wei",
+      "name": "Dr. Chen Wei",
+      "type": "Cosmetic Dentist",
+      "specialty": "Cosmetic Dentistry",
+      "hospital": "Dental Clinic Amru",
+      "image": "https://via.placeholder.com/150?text=Chen"
+    },
+    {
+      "slug": "dr-lily-wong",
+      "name": "Dr. Lily Wong",
+      "type": "Prosthodontist",
+      "specialty": "Prosthodontics",
+      "hospital": "Dental Clinic Amru",
+      "image": "https://via.placeholder.com/150?text=Lily"
+    },
+    {
+      "slug": "dr-akmal-ali",
+      "name": "Dr. Akmal Ali",
+      "type": "Endodontist",
+      "specialty": "Endodontics",
+      "hospital": "Dental Clinic Amru",
+      "image": "https://via.placeholder.com/150?text=Akmal"
+    }
+  ],
+  "kids clinic ISka": [
+    {
+      "slug": "dr-priya-sharma",
+      "name": "Dr. Priya Sharma",
+      "type": "Pediatrician",
+      "specialty": "Pediatrics",
+      "hospital": "kids clinic ISka",
+      "image": "https://via.placeholder.com/150?text=Priya"
+    },
+    {
+      "slug": "dr-vikram-singh",
+      "name": "Dr. Vikram Singh",
+      "type": "Child Psychologist",
+      "specialty": "Child Psychology",
+      "hospital": "kids clinic ISka",
+      "image": "https://via.placeholder.com/150?text=Vikram"
+    },
+    {
+      "slug": "dr-kavya-patel",
+      "name": "Dr. Kavya Patel",
+      "type": "Pediatric Surgeon",
+      "specialty": "Pediatric Surgery",
+      "hospital": "kids clinic ISka",
+      "image": "https://via.placeholder.com/150?text=Kavya"
+    }
+  ]
+}

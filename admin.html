@@ -14,17 +14,17 @@
     <div class="nav-logo">
       <a href="index.html">WOWClinicFinder</a>
     </div>
-    <div class="nav-menu">
+    <div class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link">Find Clinics</a>
       <a href="view.html" class="nav-link active">Clinic Admin Dashboard</a>
       <a href="cursor.html" class="nav-link">Interactive Demo</a>
     </div>
-    <div class="nav-toggle">
+    <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navMenu" type="button">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </div>
+    </button>
   </div>
 </nav>
 
@@ -35,43 +35,48 @@
 
 <h2>📋 My Appointment</h2>
 
-<div class="card">
-  <p id="details"></p>
-  <button id="deleteBooking" class="btn" style="display:none; margin-top: 12px;">Delete Booking</button>
+<div class="card table-responsive">
+  <table class="appointment-table" aria-label="Current Appointments List">
+    <thead>
+      <tr>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Clinic</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody id="bookingTableBody"></tbody>
+  </table>
 </div>
 
 <a href="index.html" class="btn">Back Home</a>
 
 <script>
-  let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
-  let deleteButton = document.getElementById("deleteBooking");
-  let detailsEl = document.getElementById("details");
+  const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+  const tableBody = document.getElementById("bookingTableBody");
 
   if (bookings.length === 0) {
-    detailsEl.innerText = "No bookings found.";
+    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:14px;">No appointments found.</td></tr>`;
   } else {
-    detailsEl.innerHTML = bookings.map((data, index) => `
-      <div style="border:1px solid #ddd; padding:12px; border-radius:8px; margin-bottom:12px;">
-        <b>Booking #${index + 1}</b><br>
-        <b>Clinic:</b> ${data.clinic} <br>
-        <b>Doctor Type:</b> ${data.doctorType} <br>
-        <b>Doctor Name:</b> ${data.doctorName} <br>
-        <b>Patient Name:</b> ${data.name} <br>
-        <b>Phone:</b> ${data.phone} <br>
-        <b>IC Number:</b> ${data.icNumber} <br>
-        <b>Pain/Symptoms:</b>
-        <p style="text-align:left; background:#f8f9fa; padding:12px; border-radius:8px;">${data.painDescription}</p>
-<b>Date:</b> ${data.date} <br>
-<b>Time:</b> ${data.time} <br>
-<b>Status:</b> ${data.status} <br>
-<button onclick="approveBooking(${index})" class="btn" style="margin-top:8px; background:green; color:white;">
-  Approve
-</button>
-        <button onclick="deleteBooking(${index})" class="btn" style="margin-top:8px; background:red; color:white;">Delete</button>
-      </div>
+    tableBody.innerHTML = bookings.map((data, index) => `
+      <tr>
+        <td><strong>${data.name || 'N/A'}</strong><br><small>IC: ${data.icNumber || 'N/A'}</small></td>
+        <td>${data.phone || 'N/A'}</td>
+        <td>${data.clinic || 'N/A'}</td>
+        <td><strong>${data.doctorType || 'N/A'}</strong><br><small>${data.doctorName || ''}</small></td>
+        <td>${data.date || 'N/A'}</td>
+        <td>${data.time || 'N/A'}</td>
+        <td>
+          <button onclick="approveBooking(${index})" class="btn" style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">Approve</button>
+          <button onclick="deleteBooking(${index})" class="btn" style="background:red; padding:6px 12px; font-size:12px;">Delete</button>
+        </td>
+      </tr>
     `).join('');
   }
-function approveBooking(index) {
+  function approveBooking(index) {
   let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
 
   bookings[index].status = "Approved";
@@ -112,9 +117,15 @@ function approveBooking(index) {
     const navMenu = document.querySelector('.nav-menu');
 
     if (navToggle && navMenu) {
+      function updateNavExpanded() {
+        const isExpanded = navMenu.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      }
+
       navToggle.addEventListener('click', function() {
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
+        updateNavExpanded();
       });
 
       // Close mobile menu when clicking on a link
@@ -123,6 +134,7 @@ function approveBooking(index) {
         link.addEventListener('click', function() {
           navToggle.classList.remove('active');
           navMenu.classList.remove('active');
+          updateNavExpanded();
         });
       });
 

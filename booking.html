@@ -14,18 +14,18 @@
     <div class="nav-logo">
       <a href="index.html">WOWClinicFinder</a>
     </div>
-    <div class="nav-menu">
+    <div class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link">Find Clinics</a>
       <a href="view.html" class="nav-link">My Bookings</a>
       <a href="admin.html" class="nav-link">Admin Panel</a>
       <a href="cursor.html" class="nav-link">Interactive Demo</a>
     </div>
-    <div class="nav-toggle">
+    <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navMenu" type="button">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </div>
+    </button>
   </div>
 </nav>
 
@@ -48,24 +48,24 @@
 </section>
 
 <form class="form">
-  <input type="text" id="userName" placeholder="Your Name" required>
-  <input type="text" id="userPhone" placeholder="Phone Number" required>
-  <input type="text" id="userIC" placeholder="Your IC number without (-)" required>
-  <input type="email" id="userEmail" placeholder="Your Email Address" required>
+  <input type="text" id="userName" placeholder="Your Name" aria-label="Your full name" title="Enter your full name for the appointment booking." required>
+  <input type="text" id="userPhone" placeholder="Phone Number" aria-label="Phone number" title="Enter your Malaysian phone number, e.g. 0123456789." required>
+  <input type="text" id="userIC" placeholder="Your IC number without (-)" aria-label="IC number" title="Enter your 12-digit IC number without dashes or spaces." required>
+  <input type="email" id="userEmail" placeholder="Your Email Address" aria-label="Email address" title="Enter the email where booking confirmation will be sent." required>
   
   <label for="doctorType">Doctor Type:</label>
-  <select id="doctorType" required>
+  <select id="doctorType" aria-label="Choose doctor type" title="Select the type of doctor you want to see." required>
     <option value="">-- Select Doctor Type --</option>
   </select>
   
   <label for="doctorName">Doctor Name:</label>
-  <p id="doctorName" style="background:#f0f0f0; padding:8px; border-radius:4px;">-- Select a doctor type --</p>
+  <p id="doctorName" style="background:#f0f0f0; padding:8px; border-radius:4px;" aria-live="polite">-- Select a doctor type --</p>
   
   <label for="painDescription">Describe Your Pain/Symptoms:</label>
-  <textarea id="painDescription" placeholder="Please describe your pain, symptoms, or health concerns in detail..." rows="5" required></textarea>
+  <textarea id="painDescription" placeholder="Please describe your pain, symptoms, or health concerns in detail..." aria-label="Pain and symptom description" title="Tell us about your symptoms so we can match you to the best doctor." rows="5" required></textarea>
   
-  <input type="date" id="bookingDate" required>
-  <input type="time" id="bookingTime" required>
+  <input type="date" id="bookingDate" aria-label="Appointment date" title="Choose the date for your appointment." required>
+  <input type="time" id="bookingTime" aria-label="Appointment time" title="Choose the time for your appointment." required>
   <button type="submit">Confirm Booking</button>
 </form>
 
