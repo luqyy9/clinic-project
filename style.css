@@ -1732,4 +1732,8 @@ header, main, .form, .card {
 .appointment-table th,
 .appointment-table td {
     vertical-align: middle;
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
+

@@ -69,7 +69,7 @@ function displayBookings(filteredBookings) {
 
     tableBody.innerHTML = `
       <tr>
-        <td colspan="7" style="text-align:center; padding:14px;">
+        <td colspan="8" style="text-align:center; padding:14px;">
           No appointments found.
         </td>
       </tr>
@@ -90,29 +90,21 @@ function displayBookings(filteredBookings) {
         <td>${data.clinic || data.clinicName || 'N/A'}</td>
 
         <td>
-<td>
-
-  <img 
-    src="${data.doctorImage || 'image/default.jpg'}"
-    alt="Doctor Image"
-    style="
-      width:60px;
-      height:60px;
-      object-fit:cover;
-      border-radius:50%;
-      margin-bottom:8px;
-    "
-  >
-
-  <br>
-
-  <strong>${data.doctorType || data.doctor || 'N/A'}</strong>
-
-  <br>
-
-  <small>${data.doctorName || data.doctor || ''}</small>
-
-</td>
+          <img 
+            src="${data.doctorImage || 'image/default.jpg'}"
+            alt="Doctor Image"
+            style="
+              width:60px;
+              height:60px;
+              object-fit:cover;
+              border-radius:50%;
+              margin-bottom:8px;
+            "
+          >
+          <br>
+          <strong>${data.doctorType || data.doctor || 'N/A'}</strong>
+          <br>
+          <small>${data.doctorName || data.doctor || ''}</small>
         </td>
 
         <td>${data.date || 'N/A'}</td>
