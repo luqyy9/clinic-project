@@ -119,11 +119,16 @@ document.addEventListener('DOMContentLoaded', async function () {
       alert('Please select a future date.');
       return;
     }
+const doctors = clinicDoctors[selectedClinic] || [];
 
+const selectedDoctor = doctors.find(
+  doctor => doctor.type === doctorType
+);
     const booking = {
       clinic: selectedClinic,
       doctorType,
       doctorName,
+      doctorImage: selectedDoctor?.imageData || selectedDoctor?.image || '',
       name: document.getElementById('userName').value,
       phone,
       icNumber: ic,
@@ -131,6 +136,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       painDescription: document.getElementById('painDescription').value,
       date,
       time: document.getElementById('bookingTime').value,
+      isOKU: document.getElementById('isOKU')?.checked || false,
       status: 'Pending'
     };
 
