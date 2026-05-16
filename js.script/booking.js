@@ -136,6 +136,7 @@ const selectedDoctor = doctors.find(
       painDescription: document.getElementById('painDescription').value,
       date,
       time: document.getElementById('bookingTime').value,
+      isOKU: document.getElementById('isOKU')?.checked || false,
       status: 'Pending'
     };
 

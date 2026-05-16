@@ -28,6 +28,11 @@
   </div>
 </nav>
 
+<!-- OKU Accessibility Toolbar -->
+<div class="oku-toolbar" role="toolbar" aria-label="Accessibility tools">
+  <button class="oku-btn" onclick="speakPage()" id="btnSpeak">🔊 Read Aloud</button>
+</div>
+
 <!-- Particle Trail Container -->
 <div class="bubbly-particle-trail">
   <div class="particles"></div>
@@ -83,6 +88,7 @@ function displayBookings(filteredBookings) {
           <strong>${data.name || 'N/A'}</strong>
           <br>
           <small>IC: ${data.icNumber || 'N/A'}</small>
+          ${data.isOKU ? '<br><span class="oku-badge">♿ OKU</span>' : ''}
         </td>
 
         <td>${data.phone || 'N/A'}</td>
@@ -280,5 +286,8 @@ function rejectBooking(index) {
 <script>
 emailjs.init('EFNQAwKhe4o6pyY0Z');
 </script>
+
+<!-- OKU Accessibility Script -->
+<script src="js.script/oku.js"></script>
 </body>
 </html>

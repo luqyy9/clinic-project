@@ -6,7 +6,7 @@
       "type": "General Practitioner",
       "specialty": "General Medicine",
       "hospital": "Clinic Tuah",
-      "image": "image/a.jpg"
+      "image": "image/dr-ahmad.jpg"
     },
     {
       "slug": "dr-fatima-rahman",
@@ -14,7 +14,7 @@
       "type": "Family Physician",
       "specialty": "Family Medicine",
       "hospital": "Clinic Tuah",
-      "image": "https://via.placeholder.com/150?text=Fatima"
+      "image": "image/dr-fatima.jpg"
     },
     {
       "slug": "dr-mehdi-khan",
@@ -22,7 +22,7 @@
       "type": "Internal Medicine Specialist",
       "specialty": "Internal Medicine",
       "hospital": "Clinic Tuah",
-      "image": "https://via.placeholder.com/150?text=Mehdi"
+      "image": "image/dr-mehdi.jpg"
     }
   ],
   "Cosmetic clinic Whooper": [
@@ -32,7 +32,7 @@
       "type": "Plastic Surgeon",
       "specialty": "Plastic Surgery",
       "hospital": "Cosmetic clinic Whooper",
-      "image": "https://via.placeholder.com/150?text=Johan"
+      "image": "image/dr-johan.jpg"
     },
     {
       "slug": "dr-siti-nurhaliza",
@@ -40,7 +40,7 @@
       "type": "Cosmetic Surgeon",
       "specialty": "Cosmetic Surgery",
       "hospital": "Cosmetic clinic Whooper",
-      "image": "https://via.placeholder.com/150?text=Siti"
+      "image": "image/dr-siti.jpg"
     },
     {
       "slug": "dr-akyas-m",
@@ -48,7 +48,7 @@
       "type": "Dermatologist",
       "specialty": "Dermatology",
       "hospital": "Cosmetic clinic Whooper",
-      "image": "https://via.placeholder.com/150?text=Akyas"
+      "image": "image/dr-akyas.jpg"
     }
   ],
   "Dental Clinic Amru": [
@@ -58,7 +58,7 @@
       "type": "Cosmetic Dentist",
       "specialty": "Cosmetic Dentistry",
       "hospital": "Dental Clinic Amru",
-      "image": "https://via.placeholder.com/150?text=Chen"
+      "image": "image/dr-chen.jpg"
     },
     {
       "slug": "dr-lily-wong",
@@ -66,7 +66,7 @@
       "type": "Prosthodontist",
       "specialty": "Prosthodontics",
       "hospital": "Dental Clinic Amru",
-      "image": "https://via.placeholder.com/150?text=Lily"
+      "image": "image/dr-lily.jpg"
     },
     {
       "slug": "dr-akmal-ali",
@@ -74,7 +74,7 @@
       "type": "Endodontist",
       "specialty": "Endodontics",
       "hospital": "Dental Clinic Amru",
-      "image": "https://via.placeholder.com/150?text=Akmal"
+      "image": "image/dr-akmal.jpg"
     }
   ],
   "kids clinic ISka": [
@@ -84,7 +84,7 @@
       "type": "Pediatrician",
       "specialty": "Pediatrics",
       "hospital": "kids clinic ISka",
-      "image": "https://via.placeholder.com/150?text=Priya"
+      "image": "image/dr-priya.jpg"
     },
     {
       "slug": "dr-vikram-singh",
@@ -92,7 +92,7 @@
       "type": "Child Psychologist",
       "specialty": "Child Psychology",
       "hospital": "kids clinic ISka",
-      "image": "https://via.placeholder.com/150?text=Vikram"
+      "image": "image/dr-vikram.jpg"
     },
     {
       "slug": "dr-kavya-patel",
@@ -100,7 +100,7 @@
       "type": "Pediatric Surgeon",
       "specialty": "Pediatric Surgery",
       "hospital": "kids clinic ISka",
-      "image": "https://via.placeholder.com/150?text=Kavya"
+      "image": "image/dr-kavya.jpg"
     }
   ]
 }
