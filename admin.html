@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <<title>WOWClinicFinder - Admin Dashboard</title>
+  <title>WOWClinicFinder - Admin Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,12 +29,21 @@
   </div>
 </nav>
 
+<!-- OKU Accessibility Toolbar -->
+<div class="oku-toolbar" role="toolbar" aria-label="Accessibility tools">
+  <button class="oku-btn" onclick="speakPage()" id="btnSpeak">🔊 Read Aloud</button>
+</div>
+
 <!-- Particle Trail Container -->
 <div class="bubbly-particle-trail">
   <div class="particles"></div>
 </div>
 
 <h2>📋 My Appointment</h2>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search patient, doctor, clinic, or status">
+</div>
 
 <div class="card table-responsive">
   <table class="appointment-table" aria-label="Current Appointments List">
@@ -46,6 +55,7 @@
         <th scope="col">Doctor</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
+        <th scope="col">Status</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -56,27 +66,148 @@
 <a href="index.html" class="btn">Back Home</a>
 
 <script>
-  const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
   const tableBody = document.getElementById("bookingTableBody");
 
-  if (bookings.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:14px;">No appointments found.</td></tr>`;
-  } else {
-    tableBody.innerHTML = bookings.map((data, index) => `
+  // Load doctor images from clinics.json, build a name->imageData map
+  let doctorImageMap = {};
+  async function loadDoctorImages() {
+    try {
+      const response = await fetch('json file/clinics.json');
+      const clinics = await response.json();
+      for (const doctors of Object.values(clinics)) {
+        for (const doc of doctors) {
+          // Map by name AND by slug for flexible lookup
+          if (doc.imageData) {
+            doctorImageMap[doc.name] = doc.imageData;
+            doctorImageMap[doc.slug] = doc.imageData;
+          }
+        }
+      }
+    } catch (e) { console.error('Could not load clinics.json', e); }
+  }
+
+  function getDoctorImage(data) {
+    // 1. Use saved base64 if present (new bookings)
+    if (data.doctorImage && data.doctorImage.startsWith('data:')) return data.doctorImage;
+    // 2. Look up by doctor name in the map (old bookings)
+    if (data.doctorName && doctorImageMap[data.doctorName]) return doctorImageMap[data.doctorName];
+    // 3. Fall back to image path
+    if (data.doctorImage && !data.doctorImage.includes('default')) return data.doctorImage;
+    return '';
+  }
+
+  const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+
+function displayBookings(filteredBookings) {
+
+  if (filteredBookings.length === 0) {
+
+    tableBody.innerHTML = `
       <tr>
-        <td><strong>${data.name || 'N/A'}</strong><br><small>IC: ${data.icNumber || 'N/A'}</small></td>
-        <td>${data.phone || 'N/A'}</td>
-        <td>${data.clinic || data.clinicName || 'N/A'}</td>
-        <td><strong>${data.doctorType || data.doctor || 'N/A'}</strong><br><small>${data.doctorName || data.doctor || ''}</small></td>
-        <td>${data.date || 'N/A'}</td>
-        <td>${data.time || 'N/A'}</td>
-        <td>
-          <button onclick="approveBooking(${index})" class="btn" style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">Approve</button>
-          <button onclick="deleteBooking(${index})" class="btn" style="background:red; padding:6px 12px; font-size:12px;">Delete</button>
+        <td colspan="8" style="text-align:center; padding:14px;">
+          No appointments found.
         </td>
+      </tr>
+    `;
+
+  } else {
+
+    tableBody.innerHTML = filteredBookings.map((data, index) => `
+      <tr>
+        <td>
+          <strong>${data.name || 'N/A'}</strong>
+          <br>
+          <small>IC: ${data.icNumber || 'N/A'}</small>
+          ${data.isOKU ? '<br><span class="oku-badge">♿ OKU</span>' : ''}
+        </td>
+
+        <td>${data.phone || 'N/A'}</td>
+
+        <td>${data.clinic || data.clinicName || 'N/A'}</td>
+
+        <td>
+          <img 
+            src="${getDoctorImage(data)}"
+            alt="Doctor Image"
+            onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(data.doctorName||'Dr')}&size=60&background=7c3aed&color=fff&rounded=true'"
+            style="
+              width:60px;
+              height:60px;
+              object-fit:cover;
+              border-radius:50%;
+              margin-bottom:8px;
+              display:block;
+            "
+          >
+          <br>
+          <strong>${data.doctorType || data.doctor || 'N/A'}</strong>
+          <br>
+          <small>${data.doctorName || data.doctor || ''}</small>
+        </td>
+
+        <td>${data.date || 'N/A'}</td>
+
+        <td>${data.time || 'N/A'}</td>
+        <td class="status-${(data.status || 'Pending').toLowerCase()}">
+  ${data.status || 'Pending'}
+</td>
+<td>
+
+  <button onclick="approveBooking(${index})"
+    class="btn"
+    style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">
+
+    Approve
+  </button>
+
+  <button onclick="rejectBooking(${index})"
+    class="btn"
+    style="background:orange; padding:6px 12px; font-size:12px; margin-bottom:4px;">
+
+    Reject
+  </button>
+
+  <button onclick="deleteBooking(${index})"
+    class="btn"
+    style="background:red; padding:6px 12px; font-size:12px;">
+
+    Delete
+  </button>
+
+</td>
+ 
+
       </tr>
     `).join('');
   }
+}
+
+// Init: load images first, then display
+  loadDoctorImages().then(() => {
+    displayBookings(bookings);
+  });
+
+  const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+
+  const value = searchInput.value.toLowerCase();
+
+  const filteredBookings = bookings.filter(data =>
+
+    (data.name || '').toLowerCase().includes(value) ||
+
+    (data.doctor || '').toLowerCase().includes(value) ||
+
+    (data.doctorName || '').toLowerCase().includes(value) ||
+
+    (data.clinic || '').toLowerCase().includes(value) ||
+
+    (data.status || '').toLowerCase().includes(value)
+  );
+
+  displayBookings(filteredBookings);
+});
   function approveBooking(index) {
   let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
 
@@ -102,12 +233,47 @@
     location.reload();
   });
 }
-  function deleteBooking(index) {
-    let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
-    bookings.splice(index, 1);
-    localStorage.setItem("bookingList", JSON.stringify(bookings));
+function rejectBooking(index) {
+
+  let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+
+  bookings[index].status = "Rejected";
+
+  localStorage.setItem("bookingList", JSON.stringify(bookings));
+
+  emailjs.send('service_v3ot97g', 'template_5uq33qr', {
+
+    user_name: bookings[index].name,
+
+    clinic_name: bookings[index].clinic || bookings[index].clinicName || '',
+
+    doctor_type: bookings[index].doctorType || bookings[index].doctor || '',
+
+    doctor_name: bookings[index].doctorName || bookings[index].doctor || '',
+
+    booking_date: bookings[index].date,
+
+    booking_time: bookings[index].time,
+
+    user_email: bookings[index].email,
+
+    status: 'Rejected'
+
+  }).then(() => {
+
+    alert("Booking rejected and email sent!");
+
     location.reload();
-  }
+
+  }).catch((error) => {
+
+    console.error(error);
+
+    alert("Booking rejected but email failed.");
+
+    location.reload();
+  });
+}
 </script>
 
 <!-- Navigation Script -->
@@ -156,6 +322,9 @@
 <script>
 emailjs.init('EFNQAwKhe4o6pyY0Z');
 </script>
-  <script src="js.script/grayscale-toggle.js"></script>
+<script src="js.script/grayscale-toggle.js"></script>
 
+<!-- OKU Accessibility Script -->
+<script src="js.script/oku.js"></script>
+</body>
 </html>

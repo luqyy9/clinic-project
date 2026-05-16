@@ -30,6 +30,11 @@
   </div>
 </nav>
 
+<!-- OKU Accessibility Toolbar -->
+<div class="oku-toolbar" role="toolbar" aria-label="Accessibility tools">
+  <button class="oku-btn" onclick="speakPage()" id="btnSpeak">🔊 Read Aloud</button>
+</div>
+
 <!-- Particle Trail Container -->
 <div class="bubbly-particle-trail">
   <div class="particles"></div>
@@ -67,11 +72,21 @@
   
   <input type="date" id="bookingDate" aria-label="Appointment date" title="Choose the date for your appointment." required>
   <input type="time" id="bookingTime" aria-label="Appointment time" title="Choose the time for your appointment." required>
+
+  <!-- OKU Special Needs Checkbox -->
+  <label class="oku-checkbox-label">
+    <input type="checkbox" id="isOKU">
+    ♿ I require special assistance (OKU / wheelchair access)
+  </label>
+
   <button type="submit">Confirm Booking</button>
 </form>
 
 <script src="js.script/booking.js"></script>
 <script type="module" src="js.script/script.js"></script>
-  <script src="js.script/grayscale-toggle.js"></script>
+<script src="js.script/grayscale-toggle.js"></script>
 
+<!-- OKU Accessibility Script -->
+<script src="js.script/oku.js"></script>
+</body>
 </html>
