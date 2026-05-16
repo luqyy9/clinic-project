@@ -132,6 +132,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
+  // Load image from clinics.json (has base64 imageData)
+  async function loadDoctorImage(slug) {
+    try {
+      const response = await fetch('json file/clinics.json');
+      const clinics = await response.json();
+      for (const doctors of Object.values(clinics)) {
+        const found = doctors.find(d => d.slug === slug);
+        if (found) return found.imageData || found.image || '';
+      }
+    } catch (e) { console.error('Could not load clinics.json', e); }
+    return '';
+  }
+
   if (doctorSlug && doctorData[doctorSlug]) {
     const doctor = doctorData[doctorSlug];
     document.getElementById('doctorName').textContent = doctor.name;
@@ -139,12 +152,18 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('doctorHospital').textContent = doctor.hospital;
     document.getElementById('doctorQualifications').textContent = doctor.qualifications;
     document.getElementById('doctorAbout').textContent = doctor.about;
-    // You can set a specific image if available, for now using placeholder
-    if (doctor.doctorImage) {
-      document.getElementById('doctorImage').src = doctor.doctorImage;
-    } else {
-      document.getElementById('doctorImage').src = `https://via.placeholder.com/200?text=${encodeURIComponent(doctor.name.split(' ')[0])}`;
-    }
+
+    // Try base64 from clinics.json first, fall back to direct image path
+    loadDoctorImage(doctorSlug).then(imgSrc => {
+      const imgEl = document.getElementById('doctorImage');
+      if (imgSrc) {
+        imgEl.src = imgSrc;
+      } else if (doctor.doctorImage) {
+        imgEl.src = doctor.doctorImage;
+      } else {
+        imgEl.src = `image/dr-${doctorSlug.split('-')[1] || 'ahmad'}.jpg`;
+      }
+    });
   } else {
     document.querySelector('.doctor-profile-section').innerHTML = '<h2>Doctor not found</h2>';
   }
