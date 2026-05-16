@@ -65,8 +65,37 @@
 <a href="index.html" class="btn">Back Home</a>
 
 <script>
-  const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
   const tableBody = document.getElementById("bookingTableBody");
+
+  // Load doctor images from clinics.json, build a name->imageData map
+  let doctorImageMap = {};
+  async function loadDoctorImages() {
+    try {
+      const response = await fetch('json file/clinics.json');
+      const clinics = await response.json();
+      for (const doctors of Object.values(clinics)) {
+        for (const doc of doctors) {
+          // Map by name AND by slug for flexible lookup
+          if (doc.imageData) {
+            doctorImageMap[doc.name] = doc.imageData;
+            doctorImageMap[doc.slug] = doc.imageData;
+          }
+        }
+      }
+    } catch (e) { console.error('Could not load clinics.json', e); }
+  }
+
+  function getDoctorImage(data) {
+    // 1. Use saved base64 if present (new bookings)
+    if (data.doctorImage && data.doctorImage.startsWith('data:')) return data.doctorImage;
+    // 2. Look up by doctor name in the map (old bookings)
+    if (data.doctorName && doctorImageMap[data.doctorName]) return doctorImageMap[data.doctorName];
+    // 3. Fall back to image path
+    if (data.doctorImage && !data.doctorImage.includes('default')) return data.doctorImage;
+    return '';
+  }
+
+  const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
 
 function displayBookings(filteredBookings) {
 
@@ -97,14 +126,16 @@ function displayBookings(filteredBookings) {
 
         <td>
           <img 
-            src="${data.doctorImage || 'image/default.jpg'}"
+            src="${getDoctorImage(data)}"
             alt="Doctor Image"
+            onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(data.doctorName||'Dr')}&size=60&background=7c3aed&color=fff&rounded=true'"
             style="
               width:60px;
               height:60px;
               object-fit:cover;
               border-radius:50%;
               margin-bottom:8px;
+              display:block;
             "
           >
           <br>
@@ -150,8 +181,12 @@ function displayBookings(filteredBookings) {
   }
 }
 
-displayBookings(bookings);
-const searchInput = document.getElementById("searchInput");
+// Init: load images first, then display
+  loadDoctorImages().then(() => {
+    displayBookings(bookings);
+  });
+
+  const searchInput = document.getElementById("searchInput");
 
 searchInput.addEventListener("input", () => {
 

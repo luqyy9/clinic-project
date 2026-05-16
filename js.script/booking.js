@@ -128,7 +128,7 @@ const selectedDoctor = doctors.find(
       clinic: selectedClinic,
       doctorType,
       doctorName,
-      doctorImage: selectedDoctor?.image || 'image/default.jpg',
+      doctorImage: selectedDoctor?.imageData || selectedDoctor?.image || '',
       name: document.getElementById('userName').value,
       phone,
       icNumber: ic,
