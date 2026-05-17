@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
   hospital: 'Clinic Tuah',
   qualifications: 'MBBS, General Practitioner',
   about: 'Dr. Ahmad Naqiuddin Bunyamin is a friendly general practitioner serving Clinic Tuah patients with a focus on family care and preventive medicine.',
-  doctorImage: 'image/a.jpg'
 },
     'dr-Leong-Yan-Ning': {
       name: 'Dr. Leong Yan Ning',
@@ -87,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
       hospital: 'kids clinic ISka',
       qualifications: 'MBBS, Pediatric Surgeon',
       about: 'Dr. Daniel Mohanaprakash performs pediatric surgical care with compassion and precision for young patients.',
-      doctorImage: 'pic/my%20picture.jpg'
     }
   };
 
