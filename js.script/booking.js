@@ -158,6 +158,35 @@ const selectedDoctor = doctors.find(
     bookingForm.addEventListener('submit', saveBooking);
   }
 
+  function getBookingStatusClass(status) {
+    const normalized = (status || 'Pending').toLowerCase();
+    if (normalized === 'approved' || normalized === 'confirmed') return 'status-approved';
+    if (normalized === 'rejected') return 'status-rejected';
+    if (normalized === 'in progress' || normalized === 'progress') return 'status-progress';
+    return 'status-pending';
+  }
+
+  function renderBookingTrack() {
+    const trackBody = document.getElementById('bookingTrackBody');
+    if (!trackBody) return;
+
+    const savedBookings = JSON.parse(localStorage.getItem('bookingList')) || [];
+    if (savedBookings.length === 0) {
+      trackBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:18px;">No saved bookings yet.</td></tr>`;
+      return;
+    }
+
+    trackBody.innerHTML = savedBookings.map((booking) => `
+      <tr>
+        <td><strong>${booking.name || 'N/A'}</strong><br><span class="sub-text">IC: ${booking.icNumber || 'N/A'}</span></td>
+        <td><strong>${booking.doctorName || booking.doctorType || 'N/A'}</strong><br><span class="sub-text">${booking.clinic || booking.clinicName || 'N/A'}</span></td>
+        <td>${booking.date || 'N/A'}<br><span class="sub-text">${booking.time || 'N/A'}</span></td>
+        <td><span class="status-badge ${getBookingStatusClass(booking.status)}">${booking.status || 'Pending'}</span></td>
+        <td>${booking.isOKU ? '<span class="oku-badge">♿ OKU Track</span>' : '<span class="sub-text">Standard Track</span>'}</td>
+      </tr>
+    `).join('');
+  }
+
   await loadClinicData();
   selectedClinic = selectedClinic || Object.keys(clinicDoctors)[0] || '';
   renderClinicOptions();
@@ -165,6 +194,7 @@ const selectedDoctor = doctors.find(
   if (clinicSelect) clinicSelect.value = selectedClinic;
   populateDoctors(selectedClinic);
   renderDoctorGrid(selectedClinic);
+  renderBookingTrack();
 });
 
 document.addEventListener('DOMContentLoaded', function () {

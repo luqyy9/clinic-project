@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WOWClinicFinder - Book Healthcare Appointments Online</title>
+  <title>WOWClinicFinder - Premium Healthcare Booking</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="nav-logo">
-      <a href="index.html"> WOWClinicFinder</a>
+      <a href="index.html">WOWClinicFinder</a>
     </div>
     <div class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-link active">Home</a>
@@ -39,15 +39,23 @@
 <!-- Hero Section -->
 <section class="hero">
   <div class="hero-content">
-    <h1>🏥 Your Health, Our Priority</h1>
-    <p class="hero-subtitle">Find, book, and manage your healthcare appointments with ease in Kuantan</p>
-    <div class="location-badge">
-      <span class="location-icon">📍</span>
-      <span class="location-text">Available in Kuantan, Pahang</span>
-    </div>
+    <span class="hero-pill">Now serving clinics across Kuantan</span>
+    <h1>Healthcare booking made fast, clear, and trusted.</h1>
+    <p class="hero-subtitle">Book verified clinics, manage appointments instantly, and get special assistance with a platform designed for families and local communities.</p>
     <div class="hero-buttons">
       <a href="map.html" class="btn btn-primary">Find Clinics Near Me</a>
-      <a href="view.html" class="btn btn-secondary">View My Appointments</a>
+      <a href="view.html" class="btn btn-secondary">My Bookings</a>
+    </div>
+    <div class="hero-highlights">
+      <div class="hero-highlight-card">
+        <span>24/7 booking support</span>
+      </div>
+      <div class="hero-highlight-card">
+        <span>Trusted by local families</span>
+      </div>
+      <div class="hero-highlight-card">
+        <span>OKU-friendly appointment flow</span>
+      </div>
     </div>
   </div>
 </section>
@@ -85,33 +93,49 @@
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">🗺️</div>
-        <h3>Interactive Clinic Map</h3>
-        <p>Discover clinics in Kuantan with our interactive map. View clinic details, specialties, and operating hours.</p>
+        <h3>Smart Clinic Discovery</h3>
+        <p>Find verified clinics in Kuantan quickly with clear service details, opening hours, and facility access.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📅</div>
-        <h3>Easy Booking</h3>
-        <p>Book appointments online with just a few clicks. Choose your preferred doctor type and time slot.</p>
+        <h3>Smooth Appointment Booking</h3>
+        <p>Reserve your slot in seconds and receive instant confirmation to avoid long wait times.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">👨‍⚕️</div>
-        <h3>Specialized Care</h3>
-        <p>Access a variety of healthcare services including general practice, dental care, cosmetic services, and pediatric care in Kuantan.</p>
+        <h3>Specialist Selection</h3>
+        <p>Choose from trusted local doctors across general care, pediatrics, dentistry, and more.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📱</div>
-        <h3>Mobile Friendly</h3>
-        <p>Manage your appointments on any device. Our responsive design works perfectly on phones, tablets, and desktops.</p>
+        <h3>Mobile-friendly Experience</h3>
+        <p>Access your bookings and clinic details from any device with responsive navigation and clear layouts.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
-        <h3>Secure & Private</h3>
-        <p>Your personal health information is protected with industry-standard security measures.</p>
+        <h3>Privacy-first Platform</h3>
+        <p>Your personal information stays secure while appointment details remain easy to manage.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
-        <h3>Quick & Convenient</h3>
-        <p>Save time with instant booking confirmation and easy appointment management.</p>
+        <h3>Fast Appointment Tracking</h3>
+        <p>Monitor your booking status and queue updates with a polished, professional dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="container">
+    <h2>Trusted by local patients and clinics</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p>“Booking was fast and clear. I found a clinic in minutes and the appointment reminder kept me on schedule.”</p>
+        <strong>— Nur Aisyah, Kuantan</strong>
+      </div>
+      <div class="review-card">
+        <p>“The OKU support options made it easy for my father to book with wheelchair access at the clinic.”</p>
+        <strong>— Ahmad Rizal</strong>
       </div>
     </div>
   </div>
@@ -175,7 +199,6 @@
 
 <!-- Navigation Script -->
 <script>
-  // Mobile menu toggle functionality
   document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -192,7 +215,6 @@
         updateNavExpanded();
       });
 
-      // Close mobile menu when clicking on a link
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -202,7 +224,6 @@
         });
       });
 
-      // Close mobile menu when clicking outside
       document.addEventListener('click', function(event) {
         if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
           navToggle.classList.remove('active');
@@ -213,6 +234,7 @@
     }
   });
 </script>
-  <script src="js.script/grayscale-toggle.js"></script>
+<script src="js.script/grayscale-toggle.js"></script>
 
+</body>
 </html>

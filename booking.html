@@ -82,6 +82,25 @@
   <button type="submit">Confirm Booking</button>
 </form>
 
+<section class="trackbook-section">
+  <h2 class="view-title">Your Appointment Trackbook</h2>
+  <p class="view-subtitle">Review your saved booking records in the same clean trackbook style.</p>
+  <div class="table-container">
+    <table class="data-table" aria-label="Saved appointment bookings">
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Clinic / Doctor</th>
+          <th>Date & Time</th>
+          <th>Status</th>
+          <th>Special Access</th>
+        </tr>
+      </thead>
+      <tbody id="bookingTrackBody"></tbody>
+    </table>
+  </div>
+</section>
+
 <script src="js.script/booking.js"></script>
 <script type="module" src="js.script/script.js"></script>
 <script src="js.script/grayscale-toggle.js"></script>
