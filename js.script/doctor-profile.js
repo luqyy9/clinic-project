@@ -3,90 +3,90 @@ document.addEventListener('DOMContentLoaded', function () {
   const doctorSlug = urlParams.get('doctor');
 
   const doctorData = {
-  'dr-ahmad-hassan': {
-  name: 'Dr. Ahmad Hassan',
+  'dr-ahmad-Naqiuddin-Bunyamin': {
+  name: 'Dr. Ahmad Naqiuddin Bunyamin',
   specialty: 'General Medicine',
   hospital: 'Clinic Tuah',
   qualifications: 'MBBS, General Practitioner',
-  about: 'Dr. Ahmad Hassan is a friendly general practitioner serving Clinic Tuah patients with a focus on family care and preventive medicine.',
+  about: 'Dr. Ahmad Naqiuddin Bunyamin is a friendly general practitioner serving Clinic Tuah patients with a focus on family care and preventive medicine.',
   doctorImage: 'image/a.jpg'
 },
-    'dr-fatima-rahman': {
-      name: 'Dr. Fatima Rahman',
+    'dr-Leong-Yan-Ning': {
+      name: 'Dr. Leong Yan Ning',
       specialty: 'Family Medicine',
       hospital: 'Clinic Tuah',
       qualifications: 'MBBS, Family Physician',
-      about: 'Dr. Fatima Rahman offers family-focused care for all ages, helping patients manage long-term health and wellness.'
+      about: 'Dr. Leong Yan Ning offers family-focused care for all ages, helping patients manage long-term health and wellness.'
     },
-    'dr-mehdi-khan': {
-      name: 'Dr. Mehdi Khan',
+    'dr-Aznita-Ibrahim': {
+      name: 'Dr. Aznita Ibrahim',
       specialty: 'Internal Medicine',
       hospital: 'Clinic Tuah',
       qualifications: 'MBBS, Internal Medicine Specialist',
-      about: 'Dr. Mehdi Khan specializes in internal medicine and chronic care, providing effective diagnosis and treatment plans.'
+      about: 'Dr. Aznita Ibrahim specializes in internal medicine and chronic care, providing effective diagnosis and treatment plans.'
     },
-    'dr-johan-aziz': {
-      name: 'Dr. Johan Aziz',
+    'dr-Khoo-Yan-Teng': {
+      name: 'Dr. Khoo Yan Teng',
       specialty: 'Plastic Surgery',
       hospital: 'Cosmetic clinic Whooper',
       qualifications: 'MBBS, Plastic Surgeon',
-      about: 'Dr. Johan Aziz provides cosmetic and reconstructive plastic surgery with a warm patient-centered approach.'
+      about: 'Dr. Khoo Yan Teng provides cosmetic and reconstructive plastic surgery with a warm patient-centered approach.'
     },
-    'dr-siti-nurhaliza': {
-      name: 'Dr. Siti Nurhaliza',
+    'dr-Bernard-Chan': {
+      name: 'Dr. Bernard Chan',
       specialty: 'Cosmetic Surgery',
       hospital: 'Cosmetic clinic Whooper',
       qualifications: 'MBBS, Cosmetic Surgeon',
-      about: 'Dr. Siti Nurhaliza offers cosmetic procedures with detailed care for aesthetic results and patient safety.'
+      about: 'Dr. Bernard Chan offers cosmetic procedures with detailed care for aesthetic results and patient safety.'
     },
-    'dr-akyas-m': {
-      name: 'Dr. Akyas M',
+    'dr-Foong-boon-Bee': {
+      name: 'Dr. Foong Boon Bee',
       specialty: 'Dermatology',
       hospital: 'Cosmetic clinic Whooper',
       qualifications: 'MBBS, Dermatologist',
-      about: 'Dr. Akyas M treats skin conditions and provides cosmetic dermatology services for healthier skin.'
+      about: 'Dr. Foong Boon Bee treats skin conditions and provides cosmetic dermatology services for healthier skin.'
     },
-    'dr-chen-wei': {
-      name: 'Dr. Chen Wei',
+    'dr-Melissa-Foo': {
+      name: 'Dr. Melissa Foo',
       specialty: 'Cosmetic Dentistry',
       hospital: 'Dental Clinic Amru',
       qualifications: 'BDS, Cosmetic Dentist',
-      about: 'Dr. Chen Wei specializes in cosmetic dental treatments and smile enhancements at Dental Clinic Amru.'
+      about: 'Dr. Melissa Foo specializes in cosmetic dental treatments and smile enhancements at Dental Clinic Amru.'
     },
-    'dr-lily-wong': {
-      name: 'Dr. Lily Wong',
+    'dr-Catherine-Lee-Tong-How': {
+      name: 'Dr. Catherine Lee Tong How',
       specialty: 'Prosthodontics',
       hospital: 'Dental Clinic Amru',
       qualifications: 'BDS, Prosthodontist',
-      about: 'Dr. Lily Wong is experienced in restorative dental care, including crowns, bridges, and prosthetics.'
+      about: 'Dr. Catherine Lee Tong How is experienced in restorative dental care, including crowns, bridges, and prosthetics.'
     },
-    'dr-akmal-ali': {
-      name: 'Dr. Akmal Ali',
+    'Datuk-Dr-Mohd-Noor-Awang': {
+      name: 'Datuk Dr. Mohd Noor Awang',
       specialty: 'Endodontics',
       hospital: 'Dental Clinic Amru',
       qualifications: 'BDS, Endodontist',
-      about: 'Dr. Akmal Ali treats root canal conditions and dental pain using advanced endodontic techniques.'
+      about: 'DatukDr. Mohd Noor Awang treats root canal conditions and dental pain using advanced endodontic techniques.'
     },
-    'dr-priya-sharma': {
-      name: 'Dr. Priya Sharma',
+    'Dr.-Khoo-Teng-Hoc': {
+      name: 'Dr. Khoo Teng Hock',
       specialty: 'Pediatrics',
       hospital: 'kids clinic ISka',
       qualifications: 'MBBS, Pediatrician',
-      about: 'Dr. Priya Sharma provides compassionate pediatric care with a focus on child growth and wellness.'
+      about: 'Dr. Khoo Teng Hock provides compassionate pediatric care with a focus on child growth and wellness.'
     },
-    'dr-vikram-singh': {
-      name: 'Dr. Vikram Singh',
+    'Ms-Lim-Maureen': {
+      name: 'Dr. Lim Maureen',
       specialty: 'Child Psychology',
       hospital: 'kids clinic ISka',
       qualifications: 'MA, Child Psychologist',
-      about: 'Dr. Vikram Singh supports children and families with behavioral health and emotional wellness services.'
+      about: 'Dr. Lim Maureen supports children and families with behavioral health and emotional wellness services.'
     },
-    'dr-kavya-patel': {
-      name: 'Dr. Kavya Patel',
+    'Dr.-Daniel-Mohanaprakash': {
+      name: 'Dr. Daniel Mohanaprakash',
       specialty: 'Pediatric Surgery',
       hospital: 'kids clinic ISka',
       qualifications: 'MBBS, Pediatric Surgeon',
-      about: 'Dr. Kavya Patel performs pediatric surgical care with compassion and precision for young patients.',
+      about: 'Dr. Daniel Mohanaprakash performs pediatric surgical care with compassion and precision for young patients.',
       doctorImage: 'pic/my%20picture.jpg'
     }
   };
