@@ -3,48 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const doctorSlug = urlParams.get('doctor');
 
   const doctorData = {
-    'mohd-fitri-shukri-bin-mohamed-adanan': {
-      name: 'Dr. Mohd Fitri Shukri Bin Mohamed Adanan',
-      specialty: 'Paediatric Surgery',
-      hospital: 'Damansara Specialist Hospital 2',
-      qualifications: 'MBBS (UM) MPaedSurg (UM), AOI / Fellowship in Paediatric Liver Transplantation',
-      about: 'Dr. Mohd Fitri Shukri Bin Mohamed Adanan is a specialist in Paediatric Surgery with extensive experience in paediatric liver transplantation. He is dedicated to providing the best care for children requiring surgical interventions.'
-    },
-    'noor-azrin-md-anuar': {
-      name: 'Dr. Noor Azrin Md Anuar',
-      specialty: 'Otorhinolaryngology (Ear, Nose & Throat)',
-      hospital: 'Damansara Specialist Hospital 2',
-      qualifications: 'MD (UKM), Masters ORL-HNS (UKM), Clinical Fellowship in Paediatric ENT (United Kingdom)',
-      about: 'Dr. Noor Azrin Md Anuar specializes in Otorhinolaryngology with a focus on paediatric ENT. He has completed advanced training in the UK and is committed to treating ear, nose, and throat conditions in both adults and children.'
-    },
-    'dr-priyya-subramaniam': {
-      name: 'Datin Wira Dr Priyya Subramaniam',
-      specialty: 'Internal Medicine, Dermatology',
-      hospital: 'Damansara Specialist Hospital',
-      qualifications: 'LRCP & SI Mb Bch BAO (Ireland), MRCP (Royal College of Physicians)',
-      about: 'Datin Wira Dr Priyya Subramaniam is a specialist in Internal Medicine and Dermatology. She provides comprehensive care for various medical conditions and skin disorders.'
-    },
-    'ramizu-shaari': {
-      name: 'Assoc. Prof. Dr. Ramizu Shaari',
-      specialty: 'Oral & Maxillofacial Surgery',
-      hospital: 'KPJ Perdana Specialist Hospital',
-      qualifications: 'M.Clin. Dentistry (Oral Maxillo Facial Surgery) (UM), B.D.S. (UM)',
-      about: 'Assoc. Prof. Dr. Ramizu Shaari is an expert in Oral & Maxillofacial Surgery. He handles complex surgical procedures related to the mouth, jaws, and face.'
-    },
-    'mr-ramanuja-naidu-al-ragupathy-naidu': {
-      name: 'Dr. (Mr) Ramanuja Naidu A/L Ragupathy Naidu',
-      specialty: 'General Surgery',
-      hospital: 'Kedah Medical Centre',
-      qualifications: 'MD(MOSCOW), MRCS(IRELAND), MMED SURGERY(USM)',
-      about: 'Dr. Ramanuja Naidu is a General Surgeon with qualifications from Moscow, Ireland, and Malaysia. He performs a wide range of surgical procedures.'
-    },
-    'aamir-abdullah-abdul-kareem-khadaied': {
-      name: 'Dr. Aamir Abdullah Abdul Kareem Khadaied',
-      specialty: 'Anaesthesiology & Critical Care',
-      hospital: 'KPJ Kuala Selangor Specialist Hospital',
-      qualifications: 'MBBS (CUCMS), DRANAES&CRIT.CARE (UKM)',
-      about: 'Dr. Aamir specializes in Anaesthesiology and Critical Care. He ensures patient safety during surgeries and manages critical care units.'
-    },'dr-ahmad-hassan': {
+  'dr-ahmad-hassan': {
   name: 'Dr. Ahmad Hassan',
   specialty: 'General Medicine',
   hospital: 'Clinic Tuah',
