@@ -10,32 +10,32 @@ document.addEventListener('DOMContentLoaded', function () {
     detailsElement.innerHTML = `
       <div class="confirm-summary">
         <div class="confirm-detail-card">
-          <div class="confirm-detail-key">Clinic</div>
+          <div class="confirm-detail-key" style="font-weight: bold;">Clinic:</div>
           <div class="confirm-detail-value">${data.clinic || 'Not specified'}</div>
         </div>
         <div class="confirm-detail-card">
-          <div class="confirm-detail-key">Appointment</div>
+          <div class="confirm-detail-key" style="font-weight: bold;">Appointment:</div>
           <div class="confirm-detail-value">${data.date || 'Not set'} • ${data.time || 'Not set'}</div>
         </div>
         <div class="confirm-detail-card">
-          <div class="confirm-detail-key">Doctor</div>
+          <div class="confirm-detail-key" style="font-weight: bold;">Doctor:</div>
           <div class="confirm-detail-value">${data.doctorName || data.doctor || 'TBD'} • ${data.doctorType || 'General'}</div>
         </div>
         <div class="confirm-detail-card">
-          <div class="confirm-detail-key">Patient</div>
+          <div class="confirm-detail-key" style="font-weight: bold;">Patient:</div>
           <div class="confirm-detail-value">${data.name || 'Unknown'} • ${data.phone || 'No phone'}</div>
         </div>
         <div class="confirm-detail-card">
-          <div class="confirm-detail-key">IC Number</div>
+          <div class="confirm-detail-key" style="font-weight: bold;">IC Number:</div>
           <div class="confirm-detail-value">${data.icNumber || 'Not provided'}</div>
         </div>
         <div class="confirm-detail-card">
-          <div class="confirm-detail-key">Email</div>
+          <div class="confirm-detail-key" style="font-weight: bold;">Email:</div>
           <div class="confirm-detail-value">${data.email || 'Not provided'}</div>
         </div>
       </div>
       <div class="confirm-detail-panel">
-        <div class="confirm-detail-panel-title">Symptoms & notes</div>
+        <div class="confirm-detail-panel-title" style="font-weight: bold;">Symptoms & notes:</div>
         <p class="confirm-symptoms">${data.painDescription || 'No additional symptom details were provided.'}</p>
       </div>
     `;
@@ -58,12 +58,12 @@ document.addEventListener('DOMContentLoaded', function () {
       user_email: data.email
     }).then(() => {
       if (emailStatusElement) {
-        emailStatusElement.style.color = 'green';
+        emailStatusElement.style.color = '#50d650';
         emailStatusElement.innerText = '✅ Confirmation email sent to ' + data.email;
       }
     }).catch((err) => {
       if (emailStatusElement) {
-        emailStatusElement.style.color = 'red';
+        emailStatusElement.style.color = '#ff4757';
         emailStatusElement.innerText = '❌ Email failed to send. You can use the button below to send manually.';
       }
       console.error('EmailJS error:', err);

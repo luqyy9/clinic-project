@@ -410,7 +410,7 @@ a:focus, button:focus, select:focus, input:focus, textarea:focus {
   }
 
   .grayscale-toggle {
-    top: -8;
+    top: -8px;
     margin-left: auto;
   }
 
@@ -1197,6 +1197,8 @@ main {
   background-attachment: scroll;
   border-radius: 15px;
   color: white;
+  position: relative;
+  z-index: 10;
 }
 
 .reviews h2 {
