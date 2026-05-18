@@ -96,10 +96,10 @@
 
 <script>
   let clinics = [
-  { name: "Clinic Tuah", lat: 3.8356432408130274, lng: 103.30245453670729, description: "Offers general medical services and consultations.", hours: "9am - 6pm" },
-  { name: "Cosmetic clinic Whooper", lat: 3.8151244897534364, lng: 103.32772948692494, description: "Specialized cosmetic services and plastic surgery", hours: "8am - 8pm" },
-  { name: "Dental Clinic Amru", lat: 3.7096273738685657,  lng: 103.10816168159545, description: "Specialized cosmetic dentistry and tooth whitening. State-of-the-art equipment and pain-free procedures.", hours: "10am - 7pm" },
-  { name: "kids clinic ISka", lat: 3.839273085930105, lng: 103.32888105301126, description: "provide kids with medical care ", hours: "9am - 9pm" }
+  { name: "Clinic Tuah", lat: 3.8356432408130274, lng: 103.30245453670729, specialty: "Family Medicine", tagline: "Reliable general care for all ages.", description: "A trusted neighborhood clinic offering comprehensive family health services, wellness screening, and follow-up care.", hours: "24 hours opened" },
+  { name: "Cosmetic clinic Whooper", lat: 3.8151244897534364, lng: 103.32772948692494, specialty: "Dermatology & Aesthetic", tagline: "Beauty treatments with clinical expertise.", description: "Specialized cosmetic care including laser therapies, skin rejuvenation, and personalized consultation for a confident appearance.", hours: "9am - 8pm" },
+  { name: "Dental Clinic Amru", lat: 3.7096273738685657,  lng: 103.10816168159545, specialty: "Dental Care", tagline: "Modern dentistry in a comfortable setting.", description: "Advanced cosmetic and restorative dentistry with gentle treatment, tooth whitening, and comprehensive oral hygiene plans.", hours: "10am - 8.30pm" },
+  { name: "kids clinic ISka", lat: 3.839273085930105, lng: 103.32888105301126, specialty: "Pediatric Care", tagline: "Compassionate care for little patients.", description: "Child-friendly medical services that support growth, vaccinations, and specialist referrals in a welcoming environment.", hours: "9am - 9pm" }
 ];
 
 let markers = [];
@@ -122,10 +122,21 @@ function showClinics(list) {
       .addTo(map)
       .bindTooltip(clinic.name)
       .bindPopup(`
-        <b>${clinic.name}</b><br>
-        <p style="font-size:12px; color:gray;">${clinic.description}</p>
-        <p style="font-size:12px; color:red;">Operating Hours: ${clinic.hours}</p>
-        <button onclick="bookClinic('${clinic.name}')">Book</button>
+        <div class="clinic-popup">
+          <div class="clinic-popup-header">
+            <div>
+              <strong class="clinic-popup-title">${clinic.name}</strong>
+              <span class="clinic-popup-subtitle">${clinic.tagline}</span>
+            </div>
+            <span class="clinic-popup-badge">${clinic.specialty}</span>
+          </div>
+          <p class="clinic-popup-description">${clinic.description}</p>
+          <div class="clinic-popup-info">
+            <span>🕒 <strong>Hours</strong>: ${clinic.hours}</span>
+            <span>📍 <strong>Area</strong>: Kuantan</span>
+          </div>
+          <button class="clinic-popup-button" onclick="bookClinic('${clinic.name}')">Book Appointment</button>
+        </div>
       `);
 
     markers.push(marker);

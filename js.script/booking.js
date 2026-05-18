@@ -20,6 +20,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   }
 
+  function findClinicKey(clinicName) {
+    if (!clinicName) return '';
+    if (clinicDoctors[clinicName]) return clinicName;
+    const matched = Object.keys(clinicDoctors).find(
+      key => key.toLowerCase() === clinicName.toLowerCase()
+    );
+    return matched || clinicName;
+  }
+
   function updateClinicText(clinic) {
     if (clinicNameElement) {
       clinicNameElement.innerText = clinic ? 'Booking at: ' + clinic : 'Select a clinic to begin';
@@ -50,10 +59,16 @@ document.addEventListener('DOMContentLoaded', async function () {
       const card = document.createElement('div');
       card.className = 'doctor-card';
       card.innerHTML = `
-        <img src="${doctor.image}" alt="${doctor.name}">
+        <div class="doctor-card-top">
+          <img src="${doctor.image}" alt="${doctor.name}">
+          <span class="doctor-card-badge">Verified</span>
+        </div>
         <h3>${doctor.name}</h3>
-        <p class="specialty">${doctor.specialty}</p>
-        <p class="hospital">${doctor.hospital}</p>
+        <p class="doctor-role">${doctor.type}</p>
+        <div class="doctor-tags">
+          <span>${doctor.specialty}</span>
+          <span>${doctor.hospital}</span>
+        </div>
         <button class="view-profile-btn" onclick="viewDoctorProfile('${doctor.slug}')">View Profile</button>
       `;
       doctorGrid.appendChild(card);
@@ -188,7 +203,7 @@ const selectedDoctor = doctors.find(
   }
 
   await loadClinicData();
-  selectedClinic = selectedClinic || Object.keys(clinicDoctors)[0] || '';
+  selectedClinic = findClinicKey(selectedClinic) || Object.keys(clinicDoctors)[0] || '';
   renderClinicOptions();
   updateClinicText(selectedClinic);
   if (clinicSelect) clinicSelect.value = selectedClinic;

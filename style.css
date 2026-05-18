@@ -1207,84 +1207,142 @@ main {
 
 /* Doctor Grid Section */
 .doctor-grid-section {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 40px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,247,255,0.98));
+  padding: 48px 24px;
   margin: 40px auto;
   max-width: 1200px;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  backdrop-filter: blur(10px);
+  border-radius: 28px;
+  border: 1px solid rgba(102, 126, 234, 0.12);
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(14px);
 }
 
 .doctor-grid-section h2 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 2.5em;
-  color: #333;
+  margin-bottom: 16px;
+  font-size: 2.4em;
+  color: #111827;
+}
+
+.doctor-grid-description {
+  max-width: 760px;
+  margin: 0 auto 36px auto;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: center;
 }
 
 .doctor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
 .doctor-card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+  padding: 24px 20px;
+  border-radius: 24px;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  position: relative;
+  overflow: hidden;
 }
 
 .doctor-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.14);
+  border-color: rgba(102, 126, 234, 0.22);
+}
+
+.doctor-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  position: relative;
 }
 
 .doctor-card img {
-  width: 100px;
-  height: 100px;
+  width: 94px;
+  height: 94px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  border: 3px solid rgba(102, 126, 234, 0.18);
+  box-shadow: 0 12px 22px rgba(102, 126, 234, 0.12);
+}
+
+.doctor-card-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 102, 241, 0.18);
 }
 
 .doctor-card h3 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 1.3em;
+  margin: 0 0 8px 0;
+  color: #111827;
 }
 
-.doctor-card .specialty {
+.doctor-role {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #475569;
+  letter-spacing: 0.01em;
+}
+
+.doctor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0 20px 0;
+}
+
+.doctor-tags span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(102, 126, 234, 0.08);
+  color: #1d4ed8;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #667eea;
-  margin-bottom: 5px;
 }
 
 .doctor-card .hospital {
-  color: #666;
-  font-size: 0.9em;
-  margin-bottom: 15px;
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 18px;
 }
 
 .view-profile-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 999px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  transition: all 0.25s ease;
 }
 
 .view-profile-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 22px rgba(102, 126, 234, 0.28);
 }
 
 .clinic-selector {
@@ -1355,7 +1413,7 @@ main {
 
 .doctor-info {
   display: grid;
-  gap: 14px;
+  gap: 18px;
   text-align: left;
 }
 
@@ -1363,7 +1421,7 @@ main {
   font-size: 2.4em;
   margin: 0;
   letter-spacing: -0.03em;
-  color: #1f2937;
+  color: #0f172a;
 }
 
 .doctor-info .specialty,
@@ -1371,13 +1429,13 @@ main {
 .doctor-info .qualifications {
   margin: 0;
   padding: 16px 18px;
-  background: #f5f7ff;
-  border-radius: 22px;
-  box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.12);
+  background: #f8fafc;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.18);
 }
 
 .doctor-info .specialty {
-  color: #4f46e5;
+  color: #4338ca;
   font-weight: 700;
   font-size: 1.05em;
 }
@@ -1391,6 +1449,85 @@ main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+}
+
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-header {
+  flex: 1;
+  display: grid;
+  gap: 12px;
+}
+
+.profile-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(102, 126, 234, 0.12);
+  color: #4338ca;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profile-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.profile-chip.verified {
+  background: linear-gradient(180deg, rgba(102, 126, 234, 0.16), rgba(124, 58, 237, 0.14));
+  color: #4f46e5;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.stat-card {
+  background: #eef2ff;
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  border-radius: 20px;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 1.3rem;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.stat-card span {
+  display: block;
+  color: #475569;
+  font-size: 0.95rem;
 }
 
 .contact-btn,
@@ -1416,6 +1553,7 @@ main {
 .doctor-details {
   min-height: 320px;
   display: grid;
+  gap: 24px;
 }
 
 .doctor-details h2 {
@@ -1431,6 +1569,43 @@ main {
   border-radius: 22px;
   padding: 22px;
   box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.doctor-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.detail-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.detail-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #0f172a;
+  font-size: 1.05rem;
+}
+
+.detail-card p,
+.detail-card ul {
+  margin: 0;
+  color: #475569;
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+.detail-card ul {
+  padding-left: 18px;
+}
+
+.detail-card ul li {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 840px) {
@@ -1812,6 +1987,94 @@ header, main, .form, .card {
   color: #fff;
   z-index: 10;
   pointer-events: none;
+}
+
+/* Clinic Popup Styling */
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  padding: 16px 18px;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.clinic-popup-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.clinic-popup-title {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.clinic-popup-subtitle {
+  display: block;
+  color: #6b7280;
+  font-size: 0.88rem;
+}
+
+.clinic-popup-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(102, 126, 234, 0.12);
+  color: #3730a3;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.clinic-popup-description {
+  margin: 0 0 12px 0;
+  color: #374151;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.clinic-popup-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.clinic-popup-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clinic-popup-button {
+  width: 100%;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 999px;
+  color: white;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clinic-popup-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(102, 126, 234, 0.25);
 }
 
 /* Responsive Design */
