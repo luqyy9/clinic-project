@@ -8,7 +8,7 @@ const ParticleTrail = {
   previousMousePosition: { x: 0, y: 0 },
   previousTimestamp: 0,
 
-  init(options = { maxParticles: 7, minParticles: 3, minSpeed: 768, throttle: 33 }) {
+  init(options = { maxParticles: 4, minParticles: 2, minSpeed: 768, throttle: 33 }) {
     if (!document.querySelector('.bubbly-particle-trail')) return
 
     window.addEventListener(
