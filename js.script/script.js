@@ -163,3 +163,52 @@ fetch('doctors.json')
   .catch(error => {
     console.error(error)
   })
+
+  // Marquee setup: measure group width and set CSS vars for smooth looping
+  function setupMarquee() {
+    const track = document.querySelector('.marquee-track')
+    if (!track) return
+
+    const groups = track.querySelectorAll('.marquee-group')
+    const firstGroup = groups[0]
+    if (!firstGroup) return
+
+    let secondGroup = groups[1]
+    if (!secondGroup || secondGroup.children.length !== firstGroup.children.length) {
+      if (secondGroup) {
+        secondGroup.remove()
+      }
+      secondGroup = firstGroup.cloneNode(true)
+      secondGroup.setAttribute('aria-hidden', 'true')
+      track.appendChild(secondGroup)
+    }
+
+    const images = firstGroup.querySelectorAll('img')
+    const imagePromises = Array.from(images).map((img) => {
+      if (img.complete) return Promise.resolve()
+      return new Promise((resolve) => {
+        img.addEventListener('load', resolve, { once: true })
+        img.addEventListener('error', resolve, { once: true })
+      })
+    })
+
+    Promise.all(imagePromises).then(() => {
+      const groupWidth = Math.ceil(firstGroup.getBoundingClientRect().width)
+      if (groupWidth <= 0) return
+
+      track.style.setProperty('--marquee-shift', groupWidth + 'px')
+
+      const pixelsPerSecond = 80 // tweak this to speed up / slow down
+      const durationSeconds = Math.max(12, Math.round(groupWidth / pixelsPerSecond))
+      track.style.setProperty('--marquee-duration', durationSeconds + 's')
+      track.style.animation = `marquee ${durationSeconds}s linear infinite`
+    })
+  }
+
+  window.addEventListener('load', () => {
+    setupMarquee()
+  })
+
+  window.addEventListener('resize', throttle(200, () => {
+    setupMarquee()
+  }))
