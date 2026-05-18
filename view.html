@@ -46,7 +46,8 @@
         <th scope="col">Doctor</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
-        <th scope="col">Action</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody id="bookingTableBody"></tbody>
@@ -70,6 +71,9 @@
         <td><strong>${data.doctorType || data.doctor || 'N/A'}</strong><br><small>${data.doctorName || data.doctor || ''}</small></td>
         <td>${data.date || 'N/A'}</td>
         <td>${data.time || 'N/A'}</td>
+        <td>
+          <span class="status ${data.status === 'Approved' ? 'approved' : 'pending'}">${data.status || 'Pending'}</span>
+        </td>
         <td>
           <button onclick="deleteBooking(${index})" class="btn" style="background:red; padding:6px 12px; font-size:12px;">Delete</button>
         </td>
