@@ -3,7 +3,8 @@
   --primary-blue: #667eea;
   --primary-purple: #764ba2;
   --accent-white: #ffffff;
-  --page-background: image-set(url("image/testbg.jpg") 1x, url("image/testbg@2x.jpg") 2x);
+  --page-background: url("image/testbg.jpg");
+  --page-background-hires: image-set(url("image/testbg.jpg") 1x, url("image/testbg@2x.jpg") 2x);
   --hero-background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25)), url("image/hands.png") center/cover no-repeat;
   --features-background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25)), url("image/family.png") center/cover no-repeat;
   --reviews-background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25)), url("image/locals.png") center/cover no-repeat;
@@ -19,7 +20,8 @@ body {
   line-height: 1.7;
   letter-spacing: 0.01em;
   text-align: center;
-  background: var(--page-background);
+  background-color: #f8fafc;
+  background-image: var(--page-background-hires), var(--page-background);
   background-size: cover;
   background-position: center center;
   background-attachment: scroll;
