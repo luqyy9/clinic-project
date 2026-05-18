@@ -53,13 +53,52 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<script src="js.script/nav.js"></script>
+<!-- Navigation Script -->
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      function updateNavExpanded() {
+        const isExpanded = navMenu.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      }
+
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        updateNavExpanded();
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          updateNavExpanded();
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          updateNavExpanded();
+        }
+      });
+    }
+  });
+</script>
 
 <script>
   let clinics = [
-  { name: "Clinic Tuah", lat: 3.8356432408130274, lng: 103.30245453670729, specialty: "Family Medicine", tagline: "Reliable general care for all ages.", description: "A trusted neighborhood clinic offering comprehensive family health services, wellness screening, and follow-up care.", hours: "24 hours opened" },
-  { name: "Cosmetic clinic Whooper", lat: 3.8151244897534364, lng: 103.32772948692494, specialty: "Dermatology & Aesthetic", tagline: "Beauty treatments with clinical expertise.", description: "Specialized cosmetic care including laser therapies, skin rejuvenation, and personalized consultation for a confident appearance.", hours: "9am - 8pm" },
-  { name: "Dental Clinic Amru", lat: 3.7096273738685657,  lng: 103.10816168159545, specialty: "Dental Care", tagline: "Modern dentistry in a comfortable setting.", description: "Advanced cosmetic and restorative dentistry with gentle treatment, tooth whitening, and comprehensive oral hygiene plans.", hours: "10am - 8.30pm" },
+  { name: "Clinic Tuah", lat: 3.8356432408130274, lng: 103.30245453670729, specialty: "Family Medicine", tagline: "Reliable general care for all ages.", description: "A trusted neighborhood clinic offering comprehensive family health services, wellness screening, and follow-up care.", hours: "9am - 6pm" },
+  { name: "Cosmetic clinic Whooper", lat: 3.8151244897534364, lng: 103.32772948692494, specialty: "Dermatology & Aesthetic", tagline: "Beauty treatments with clinical expertise.", description: "Specialized cosmetic care including laser therapies, skin rejuvenation, and personalized consultation for a confident appearance.", hours: "8am - 8pm" },
+  { name: "Dental Clinic Amru", lat: 3.7096273738685657,  lng: 103.10816168159545, specialty: "Dental Care", tagline: "Modern dentistry in a comfortable setting.", description: "Advanced cosmetic and restorative dentistry with gentle treatment, tooth whitening, and comprehensive oral hygiene plans.", hours: "10am - 7pm" },
   { name: "kids clinic ISka", lat: 3.839273085930105, lng: 103.32888105301126, specialty: "Pediatric Care", tagline: "Compassionate care for little patients.", description: "Child-friendly medical services that support growth, vaccinations, and specialist referrals in a welcoming environment.", hours: "9am - 9pm" }
 ];
 

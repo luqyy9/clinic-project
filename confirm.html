@@ -35,33 +35,64 @@
   <div class="particles"></div>
 </div>
 
-<main class="confirm-page">
-  <section class="confirm-hero">
-    <span class="confirm-badge">Booking Confirmed</span>
-    <h2>✅ Appointment Confirmed</h2>
-    <p class="confirm-intro">Your appointment is secured and the clinic has been notified. You can review the details below, contact support via WhatsApp, or return to the home page.</p>
-  </section>
+<h2>✅ Appointment Confirmed</h2>
 
-  <section class="confirm-card-wrapper">
-    <div class="card confirm-card">
-      <div class="confirm-card-header">
-        <span class="confirm-chip">Confirmed</span>
-        <span class="confirm-card-label">Booking summary</span>
-      </div>
-      <div id="details" class="confirm-details"></div>
-      <div class="confirm-actions">
-        <a href="index.html" class="btn btn-primary">Back to Home</a>
-      </div>
-    </div>
-  </section>
+<div class="card confirm-card">
+  <p id="details"></p>
+</div>
 
-  <p id="emailStatus" class="feature-note">Sending confirmation email...</p>
-</main>
+<p id="emailStatus" style="text-align:center; margin-top:12px; font-size:14px; color:gray;">
+  Sending confirmation email...
+</p>
+
+<a id="whatsappBtn" class="btn" target="_blank" style="display:block; margin:15px auto; width:fit-content;">
+  Contact via WhatsApp
+</a>
+
+<a href="index.html" class="btn">Back to Home</a>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js.script/confirm.js"></script>
 <script type="module" src="js.script/script.js"></script>
-<script src="js.script/nav.js"></script>
-<script src="js.script/grayscale-toggle.js"></script>
-</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+      function updateNavExpanded() {
+        const isExpanded = navMenu.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      }
+
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        updateNavExpanded();
+      });
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          updateNavExpanded();
+        });
+      });
+
+      document.addEventListener('click', function(event) {
+        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          updateNavExpanded();
+        }
+      });
+    }
+  });
+</script>
+<p class="feature-note">
+  📧 Automatic email confirmation will be sent after booking.
+</p>
+  <script src="js.script/grayscale-toggle.js"></script>
+
 </html>

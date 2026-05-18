@@ -206,5 +206,29 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.doctor-profile-section').innerHTML = '<h2>Doctor not found</h2>';
   }
 
-  // Navigation is handled by js.script/nav.js
+  // Navigation toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach((link) => {
+      link.addEventListener('click', function () {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
+    });
+  }
 });
