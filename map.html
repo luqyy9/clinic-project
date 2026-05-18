@@ -53,46 +53,7 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<!-- Navigation Script -->
-<script>
-  // Mobile menu toggle functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (navToggle && navMenu) {
-      function updateNavExpanded() {
-        const isExpanded = navMenu.classList.contains('active');
-        navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-      }
-
-      navToggle.addEventListener('click', function() {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        updateNavExpanded();
-      });
-
-      // Close mobile menu when clicking on a link
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          navToggle.classList.remove('active');
-          navMenu.classList.remove('active');
-          updateNavExpanded();
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-          navToggle.classList.remove('active');
-          navMenu.classList.remove('active');
-          updateNavExpanded();
-        }
-      });
-    }
-  });
-</script>
+<script src="js.script/nav.js"></script>
 
 <script>
   let clinics = [

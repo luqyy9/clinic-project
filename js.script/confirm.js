@@ -8,17 +8,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (detailsElement) {
     detailsElement.innerHTML = `
-      <b>Clinic:</b> ${data.clinic || ''} <br>
-      <b>Doctor Type:</b> ${data.doctorType || ''} <br>
-      <b>Doctor Name:</b> ${data.doctorName || ''} <br>
-      <b>Patient Name:</b> ${data.name || ''} <br>
-      <b>Phone:</b> ${data.phone || ''} <br>
-      <b>IC Number:</b> ${data.icNumber || ''} <br>
-      <b>Pain/Symptoms:</b>
-      <p style="text-align:left; background:#f8f9fa; padding:12px; border-radius:8px;">${data.painDescription || ''}</p>
-      <b>Date:</b> ${data.date || ''} <br>
-      <b>Time:</b> ${data.time || ''}
+      <div class="confirm-summary">
+        <div class="confirm-detail-card">
+          <div class="confirm-detail-key">Clinic</div>
+          <div class="confirm-detail-value">${data.clinic || 'Not specified'}</div>
+        </div>
+        <div class="confirm-detail-card">
+          <div class="confirm-detail-key">Appointment</div>
+          <div class="confirm-detail-value">${data.date || 'Not set'} • ${data.time || 'Not set'}</div>
+        </div>
+        <div class="confirm-detail-card">
+          <div class="confirm-detail-key">Doctor</div>
+          <div class="confirm-detail-value">${data.doctorName || data.doctor || 'TBD'} • ${data.doctorType || 'General'}</div>
+        </div>
+        <div class="confirm-detail-card">
+          <div class="confirm-detail-key">Patient</div>
+          <div class="confirm-detail-value">${data.name || 'Unknown'} • ${data.phone || 'No phone'}</div>
+        </div>
+        <div class="confirm-detail-card">
+          <div class="confirm-detail-key">IC Number</div>
+          <div class="confirm-detail-value">${data.icNumber || 'Not provided'}</div>
+        </div>
+        <div class="confirm-detail-card">
+          <div class="confirm-detail-key">Email</div>
+          <div class="confirm-detail-value">${data.email || 'Not provided'}</div>
+        </div>
+      </div>
+      <div class="confirm-detail-panel">
+        <div class="confirm-detail-panel-title">Symptoms & notes</div>
+        <p class="confirm-symptoms">${data.painDescription || 'No additional symptom details were provided.'}</p>
+      </div>
     `;
+  }
+
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  if (whatsappBtn) {
+    const supportMessage = `Hello WOWClinicFinder, my appointment is confirmed for ${data.date || 'N/A'} at ${data.time || 'N/A'} with ${data.doctorName || 'a doctor'} at ${data.clinic || 'the clinic'}.`;
+    whatsappBtn.href = `https://wa.me/60123456789?text=${encodeURIComponent(supportMessage)}`;
   }
 
   if (data.email) {
@@ -47,36 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
     emailStatusElement.style.color = 'red';
     emailStatusElement.innerText = '❌ No booking data found.';
   }
-
-  attachNavHandlers();
 });
-
-function attachNavHandlers() {
-  const navToggle = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-
-  if (!navToggle || !navMenu) return;
-
-  navToggle.addEventListener('click', function () {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-  });
-
-  const navLinks = document.querySelectorAll('.nav-link');
-  navLinks.forEach((link) => {
-    link.addEventListener('click', function () {
-      navToggle.classList.remove('active');
-      navMenu.classList.remove('active');
-    });
-  });
-
-  document.addEventListener('click', function (event) {
-    if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-      navToggle.classList.remove('active');
-      navMenu.classList.remove('active');
-    }
-  });
-}
 
 function createManualEmailLink(data) {
   if (!data.email) return;

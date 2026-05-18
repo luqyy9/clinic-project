@@ -212,40 +212,7 @@ const selectedDoctor = doctors.find(
   renderBookingTrack();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const navToggle = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-
-  if (navToggle && navMenu) {
-    function updateNavExpanded() {
-      const isExpanded = navMenu.classList.contains('active');
-      navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-    }
-
-    navToggle.addEventListener('click', function () {
-      navToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      updateNavExpanded();
-    });
-
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach((link) => {
-      link.addEventListener('click', function () {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        updateNavExpanded();
-      });
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        updateNavExpanded();
-      }
-    });
-  }
-});
+// Navigation is handled by js.script/nav.js
 
 window.viewDoctorProfile = function(doctorSlug) {
   window.location.href = `doctor-profile.html?doctor=${doctorSlug}`;

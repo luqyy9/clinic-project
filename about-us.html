@@ -101,23 +101,8 @@
   </section>
 </main>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (navToggle && navMenu) {
-      navToggle.addEventListener('click', function() {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        const isExpanded = navToggle.classList.contains('active');
-        navToggle.setAttribute('aria-expanded', isExpanded);
-      });
-    }
-  });
-</script>
-
+<script src="js.script/nav.js"></script>
 <script type="module" src="js.script/script.js"></script>
-  <script src="js.script/grayscale-toggle.js"></script>
+<script src="js.script/grayscale-toggle.js"></script>
 
 </html>

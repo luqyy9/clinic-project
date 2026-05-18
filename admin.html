@@ -97,12 +97,29 @@
     return '';
   }
 
-  const bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+  let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+
+function getSearchValue() {
+  return searchInput?.value.trim().toLowerCase() || '';
+}
+
+function getFilteredBookings() {
+  const query = getSearchValue();
+  if (!query) return bookings;
+
+  return bookings.filter(data =>
+    (data.name || '').toLowerCase().includes(query) ||
+    (data.doctor || '').toLowerCase().includes(query) ||
+    (data.doctorName || '').toLowerCase().includes(query) ||
+    (data.clinic || data.clinicName || '').toLowerCase().includes(query) ||
+    (data.status || '').toLowerCase().includes(query)
+  );
+}
 
 function displayBookings(filteredBookings) {
+  filteredBookings = filteredBookings || getFilteredBookings();
 
   if (filteredBookings.length === 0) {
-
     tableBody.innerHTML = `
       <tr>
         <td colspan="8" style="text-align:center; padding:14px;">
@@ -110,10 +127,12 @@ function displayBookings(filteredBookings) {
         </td>
       </tr>
     `;
+    return;
+  }
 
-  } else {
-
-    tableBody.innerHTML = filteredBookings.map((data, index) => `
+  tableBody.innerHTML = filteredBookings.map((data) => {
+    const actualIndex = bookings.indexOf(data);
+    return `
       <tr>
         <td>
           <strong>${data.name || 'N/A'}</strong>
@@ -150,65 +169,53 @@ function displayBookings(filteredBookings) {
 
         <td>${data.time || 'N/A'}</td>
         <td class="status-${(data.status || 'Pending').toLowerCase()}">
-  ${data.status || 'Pending'}
-</td>
-<td>
-
-  <button onclick="approveBooking(${index})"
-    class="btn"
-    style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">
-
-    Approve
-  </button>
-
-  <button onclick="rejectBooking(${index})"
-    class="btn"
-    style="background:orange; padding:6px 12px; font-size:12px; margin-bottom:4px;">
-
-    Reject
-  </button>
-
-  <button onclick="deleteBooking(${index})"
-    class="btn"
-    style="background:red; padding:6px 12px; font-size:12px;">
-
-    Delete
-  </button>
-
-</td>
- 
-
+          ${data.status || 'Pending'}
+        </td>
+        <td>
+          <button onclick="approveBooking(${actualIndex})"
+            class="btn"
+            style="background:green; padding:6px 12px; font-size:12px; margin-bottom:4px;">
+            Approve
+          </button>
+          <button onclick="rejectBooking(${actualIndex})"
+            class="btn"
+            style="background:orange; padding:6px 12px; font-size:12px; margin-bottom:4px;">
+            Reject
+          </button>
+          <button onclick="deleteBooking(${actualIndex})"
+            class="btn"
+            style="background:red; padding:6px 12px; font-size:12px;">
+            Delete
+          </button>
+        </td>
       </tr>
-    `).join('');
-  }
+    `;
+  }).join('');
 }
 
 // Init: load images first, then display
-  loadDoctorImages().then(() => {
-    displayBookings(bookings);
-  });
+loadDoctorImages().then(() => {
+  displayBookings();
+});
 
-  const searchInput = document.getElementById("searchInput");
+const searchInput = document.getElementById("searchInput");
 
 searchInput.addEventListener("input", () => {
-
-  const value = searchInput.value.toLowerCase();
-
-  const filteredBookings = bookings.filter(data =>
-
-    (data.name || '').toLowerCase().includes(value) ||
-
-    (data.doctor || '').toLowerCase().includes(value) ||
-
-    (data.doctorName || '').toLowerCase().includes(value) ||
-
-    (data.clinic || '').toLowerCase().includes(value) ||
-
-    (data.status || '').toLowerCase().includes(value)
-  );
-
-  displayBookings(filteredBookings);
+  displayBookings(getFilteredBookings());
 });
+
+function deleteBooking(index) {
+  bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
+  if (index < 0 || index >= bookings.length) return;
+
+  const booking = bookings[index];
+  const confirmed = confirm(`Delete appointment for ${booking.name || 'this patient'} on ${booking.date || 'unknown date'}?`);
+  if (!confirmed) return;
+
+  bookings.splice(index, 1);
+  localStorage.setItem("bookingList", JSON.stringify(bookings));
+  displayBookings();
+}
   function approveBooking(index) {
   let bookings = JSON.parse(localStorage.getItem("bookingList")) || [];
 
@@ -277,46 +284,7 @@ function rejectBooking(index) {
 }
 </script>
 
-<!-- Navigation Script -->
-<script>
-  // Mobile menu toggle functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (navToggle && navMenu) {
-      function updateNavExpanded() {
-        const isExpanded = navMenu.classList.contains('active');
-        navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-      }
-
-      navToggle.addEventListener('click', function() {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        updateNavExpanded();
-      });
-
-      // Close mobile menu when clicking on a link
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          navToggle.classList.remove('active');
-          navMenu.classList.remove('active');
-          updateNavExpanded();
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-          navToggle.classList.remove('active');
-          navMenu.classList.remove('active');
-        }
-      });
-    }
-  });
-</script>
-
+<script src="js.script/nav.js"></script>
 <script type="module" src="js.script/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 

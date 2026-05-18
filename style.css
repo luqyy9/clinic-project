@@ -9,8 +9,15 @@
   --reviews-background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25)), url("image/locals.png") center/cover no-repeat;
   --cta-background: linear-gradient(180deg, rgba(102, 126, 234, 0.85), rgba(32, 7, 56, 0.65)), url("image/doctable.png") center/cover no-repeat;
 }
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
   text-align: center;
   background: var(--page-background);
   background-size: cover;
@@ -19,7 +26,17 @@ body {
   margin: 0;
   padding: 80px 20px 20px 20px;
   min-height: 100vh;
-  color: #333;
+  color: #1e293b;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+button,
+input,
+select,
+textarea,
+a,
+.nav-link,
+.btn {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 body.grayscale {
@@ -105,8 +122,14 @@ body.grayscale {
 }
 
 /* Mobile Navigation Toggle */
+body.nav-open {
+  overflow: hidden;
+}
+
 .nav-toggle {
   display: none;
+  position: relative;
+  z-index: 1001;
   flex-direction: column;
   cursor: pointer;
   gap: 4px;
@@ -115,7 +138,7 @@ body.grayscale {
   padding: 12px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s ease;
 }
 
 .nav-toggle .bar {
@@ -364,12 +387,16 @@ a:focus, button:focus, select:focus, input:focus, textarea:focus {
     justify-content: flex-start;
     z-index: 999;
     overflow-y: auto;
-    transition: left 0.25s ease;
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: left 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
   }
 
   .nav-menu.active {
     left: 0;
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .nav-link {
@@ -1886,6 +1913,175 @@ header, main, .form, .card {
   position: relative;
   z-index: 10;
   pointer-events: auto;
+}
+
+.confirm-page {
+  max-width: 840px;
+  margin: 120px auto 40px;
+  padding: 0 20px;
+}
+
+.confirm-hero {
+  display: grid;
+  gap: 18px;
+  text-align: center;
+  margin-bottom: 28px;
+  padding: 28px 26px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.confirm-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(102, 126, 234, 0.12);
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.confirm-intro {
+  max-width: 680px;
+  margin: 0 auto;
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.confirm-card {
+  padding: 34px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(102, 126, 234, 0.14);
+  box-shadow: 0 26px 72px rgba(15, 23, 42, 0.08);
+}
+
+.confirm-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.confirm-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.confirm-card-label {
+  color: #475569;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.confirm-details {
+  color: #334155;
+  line-height: 1.85;
+  font-size: 1rem;
+  white-space: pre-line;
+  letter-spacing: 0.01em;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.confirm-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.confirm-detail-card {
+  background: #f8fafc;
+  border: 1px solid rgba(102, 126, 234, 0.12);
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.confirm-detail-key {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  color: #475569;
+}
+
+.confirm-detail-value {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #0f172a;
+}
+
+.confirm-detail-panel {
+  background: white;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 20px 22px;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.06);
+}
+
+.confirm-detail-panel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #334155;
+}
+
+.confirm-symptoms {
+  margin: 0;
+  line-height: 1.8;
+  color: #475569;
+  font-size: 0.96rem;
+}
+
+.feature-note {
+  color: #64748b;
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .confirm-card {
+    padding: 26px;
+  }
+
+  .confirm-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .confirm-summary {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Map Styles */
